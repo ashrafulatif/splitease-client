@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, DM_Sans, Lora } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
 const loraHeading = Lora({ subsets: ["latin"], variable: "--font-heading" });
 
@@ -42,7 +43,10 @@ export default function RootLayout({
         loraHeading.variable,
       )}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Toaster richColors position="top-right" />
+      </body>
     </html>
   );
 }
