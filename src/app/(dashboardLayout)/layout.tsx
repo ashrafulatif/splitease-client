@@ -1,7 +1,26 @@
-export default function DashboardLayout({
+// import DashboardNavbar from "@/components/module/Dashboard/DashboardNavbar";
+import DashboardSidebar from "@/components/module/Dashboard/DashboardSidebar";
+import React from "react";
+
+const RootDashboardLayout = async ({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return <>{children}</>;
-}
+}) => {
+  return (
+    <div className="flex h-screen overflow-hidden">
+      {/* dashboard sidebar */}
+      {/* <DashboardSidebar /> */}
+      <div className="flext flex-1 flex-col overflow-hidden">
+        {/* DashboardNavbar */}
+        {/* <DashboardNavbar /> */}
+        {/* Dashboard content */}
+        <main className="flex-1 overflow-y-auto bg-muted/10 p-4 md:p-6">
+          <div>{children}</div>
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default RootDashboardLayout;
