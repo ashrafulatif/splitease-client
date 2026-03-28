@@ -16,9 +16,31 @@ export const loginUserAction = async (
     const result = await AuthServices.loginUser(loginData);
     const tokenData = result.data;
 
+    if (
+      !tokenData?.accessToken &&
+      typeof result.error === "string" &&
+      result.error.toLowerCase().includes("email not verified")
+    ) {
+      return {
+        data: {
+          redirectTo: `/verify-email?email=${encodeURIComponent(loginData.email)}`,
+        },
+        error: null,
+      };
+    }
+
     if (tokenData?.accessToken) {
       const { accessToken, refreshToken, token, user } = tokenData;
-      const { role } = user;
+      const { role, emailVerified, email } = user;
+
+      if (!emailVerified) {
+        return {
+          data: {
+            redirectTo: `/verify-email?email=${encodeURIComponent(email)}`,
+          },
+          error: null,
+        };
+      }
 
       await setTokenInCookies("accessToken", accessToken);
       await setTokenInCookies("refreshToken", refreshToken);
