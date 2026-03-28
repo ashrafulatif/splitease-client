@@ -50,7 +50,7 @@ const LoginForm = ({ redirectPath }: { redirectPath?: string }) => {
   });
 
   return (
-    <Card className="w-full max-w-md mx-auto shadow-md">
+    <Card className="w-full max-w-md mx-auto shadow-md py-10 border border-primary/50">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold">Welcome Back!</CardTitle>
         <CardDescription>

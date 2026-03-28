@@ -11,7 +11,7 @@ const LoginPage = async ({ searchParams }: LoginPageProps) => {
   const params = await searchParams;
 
   return (
-    <div>
+    <div className="min-h-screen flex items-center">
       <LoginForm redirectPath={params?.redirect} />
     </div>
   );
