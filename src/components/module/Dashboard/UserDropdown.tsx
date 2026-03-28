@@ -19,7 +19,7 @@ const UserDropdown = ({ userInfo }: UserDropdownProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={"outline"} size={"icon"} className="rounded-full">
+        <Button variant={"outline"} size={"icon-lg"} className="rounded-full cursor-pointer border-2 border-primary">
           <span className="text-sm font-semibold">
             {userInfo.name.charAt(0).toUpperCase()}
           </span>

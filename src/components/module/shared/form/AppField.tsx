@@ -18,15 +18,18 @@ const getErrorMessage = (error: unknown): string => {
   return String(error);
 };
 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 type AppFieldProps = {
   field: AnyFieldApi;
   label: string;
-  type?: "text" | "email" | "password" | "number";
+  type?: "text" | "email" | "password" | "number" | "select";
   placeholder?: string;
   append?: React.ReactNode;
   prepend?: React.ReactNode;
   className?: string;
   disabled?: boolean;
+  options?: { value: string; label: string }[];
 };
 
 const AppField = ({
@@ -38,6 +41,7 @@ const AppField = ({
   prepend,
   className,
   disabled = false,
+  options,
 }: AppFieldProps) => {
   const firstError =
     field.state.meta.isTouched && field.state.meta.errors.length > 0
@@ -62,23 +66,44 @@ const AppField = ({
           </div>
         )}
 
-        <Input
-          id={field.name}
-          name={field.name}
-          type={type}
-          value={field.state.value}
-          placeholder={placeholder}
-          onBlur={field.handleBlur}
-          onChange={(e) => field.handleChange(e.target.value)}
-          disabled={disabled}
-          aria-invalid={hasError}
-          aria-describedby={hasError ? `${field.name}-error` : undefined}
-          className={cn(
-            prepend && "pl-10",
-            append && "pr-10",
-            hasError && "border-destructive focus-visible:ring-destructive/20",
-          )}
-        />
+        {type === "select" && options ? (
+          <Select
+            value={field.state.value}
+            onValueChange={(value) => field.handleChange(value)}
+            disabled={disabled}
+          >
+            <SelectTrigger className={cn(
+              hasError && "border-destructive focus-visible:ring-destructive/20"
+            )}>
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        ) : (
+          <Input
+            id={field.name}
+            name={field.name}
+            type={type}
+            value={field.state.value}
+            placeholder={placeholder}
+            onBlur={field.handleBlur}
+            onChange={(e) => field.handleChange(e.target.value)}
+            disabled={disabled}
+            aria-invalid={hasError}
+            aria-describedby={hasError ? `${field.name}-error` : undefined}
+            className={cn(
+              prepend && "pl-10",
+              append && "pr-10",
+              hasError && "border-destructive focus-visible:ring-destructive/20",
+            )}
+          />
+        )}
         {append && (
           <div className="absolute inset-y-0 right-0 items-center pr-3 pointer-events-none z-10">
             {append}
