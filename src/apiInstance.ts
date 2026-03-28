@@ -9,6 +9,8 @@ export const API_ENDPOINTS = {
     login: "/api/v1/auth/login",
     register: "/api/v1/auth/register",
     logout: "/api/v1/auth/logout",
+    verifyEmail: "/api/v1/auth/verify-email",
+    resendOtp: "/api/v1/auth/resend-otp",
   },
 } as const;
 

@@ -69,7 +69,75 @@ const loginUser = async (loginData: ILoginData) => {
   }
 };
 
+const verifyEmail = async (otp: string, email: string) => {
+  try {
+    const url = new URL(buildApiUrl(API_ENDPOINTS.auth.verifyEmail));
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ otp, email }),
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      return {
+        error: data.message,
+        data: null,
+      };
+    }
+
+    return {
+      message: data.message,
+      data: data.data,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: "Something went wrong",
+    };
+  }
+};
+
+const resendOtp = async (email: string) => {
+  try {
+    const url = new URL(buildApiUrl(API_ENDPOINTS.auth.resendOtp));
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      return {
+        error: data.message,
+        data: null,
+      };
+    }
+
+    return {
+      message: data.message,
+      data: data.data,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: "Something went wrong",
+    };
+  }
+};
+
 export const AuthServices = {
   registerUser,
   loginUser,
+  verifyEmail,
+  resendOtp,
 };
