@@ -1,33 +1,71 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { NavSection } from "@/types/dashboard.type";
-import { UserInfo } from "@/types/user.type";
-import { Search } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu, Search } from "lucide-react";
+import { useEffect, useState } from "react";
+import DashboardMobileSidebar from "./DashboardMobileSidebar";
+
 import UserDropdown from "./UserDropdown";
+import { UserInfo } from "@/types/user.type";
+import { NavSection } from "@/types/dashboard.type";
 
 interface DashboardNavbarProps {
   userInfo: UserInfo;
   navItems: NavSection[];
   dashboardHome: string;
 }
+
 const DashboardNavbarContent = ({
-  userInfo,
-  navItems,
   dashboardHome,
+  navItems,
+  userInfo,
 }: DashboardNavbarProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkSmallerScreen = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkSmallerScreen();
+    window.addEventListener("resize", checkSmallerScreen);
+
+    return () => {
+      window.removeEventListener("resize", checkSmallerScreen);
+    };
+  }, []);
+
   return (
-    <div className="flex items-center gap-4 w-full px-4 py-3 border-b bg-background">
-      {/* search component */}
+    <div className="flex items-center gap-4 w-full px-4 py-3 border-b h-16 bg-background">
+      {/* Mobile Menu Toggle Button And Menu */}
+      <Sheet open={isOpen && isMobile} onOpenChange={setIsOpen}>
+        <SheetTrigger asChild className="md:hidden">
+          <Button variant={"outline"} size={"icon"}>
+            <Menu className="h-5 w-5" />
+          </Button>
+        </SheetTrigger>
+
+        <SheetContent side="left" className="w-64 p-0">
+          <DashboardMobileSidebar
+            userInfo={userInfo}
+            dashboardHome={dashboardHome}
+            navItems={navItems}
+          />
+        </SheetContent>
+      </Sheet>
+
+      {/* Search Component */}
       <div className="flex-1 flex items-center">
         <div className="relative w-full hidden sm:block">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input type="text" placeholder="Search..." className="pl-9 pr-4" />
+          <Input type="text" placeholder="Search..." className="pl-9 pr-4 py-4" />
         </div>
       </div>
 
-      {/* notidfication dropdown */}
-      {/* user profile dropdown */}
+      {/* User Dropdown  */}
       <UserDropdown userInfo={userInfo} />
     </div>
   );

@@ -9,6 +9,7 @@ import { NavSection } from "@/types/dashboard.type";
 import { UserInfo } from "@/types/user.type";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 interface DashboardSidebarContentProps {
   userInfo: UserInfo;
@@ -27,7 +28,14 @@ export const DashboardSidebarContent = ({
       {/* Logo / Brand */}
       <div className="flex items-center h-16  px-6 border-b">
         <Link href={dashboardHome}>
-          <span className="text-xl font-bold text-primary">PH Healthcare</span>
+          <Image
+            src="/logo.svg"
+            alt="Logo"
+            width={120}
+            height={40}
+            priority
+            style={{ width: "auto", height: "auto" }}
+          />
         </Link>
       </div>
       {/* Navigation Area */}

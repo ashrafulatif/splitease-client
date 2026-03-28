@@ -1,4 +1,5 @@
 import VerifyEmailForm from "@/components/module/Auth/VerifyEmail/VerifyEmailForm";
+import { Metadata } from "next";
 import React from "react";
 
 const VerifyEmailPage = () => {
@@ -7,6 +8,11 @@ const VerifyEmailPage = () => {
       <VerifyEmailForm />
     </div>
   );
+};
+
+export const metadata: Metadata = {
+  title: "Verify Email",
+  description: "Verify your email address",
 };
 
 export default VerifyEmailPage;

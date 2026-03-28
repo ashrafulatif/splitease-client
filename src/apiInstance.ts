@@ -11,6 +11,7 @@ export const API_ENDPOINTS = {
     logout: "/api/v1/auth/logout",
     verifyEmail: "/api/v1/auth/verify-email",
     resendOtp: "/api/v1/auth/resend-otp",
+    me: "/api/v1/auth/me",
   },
 } as const;
 

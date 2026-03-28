@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { API_ENDPOINTS, buildApiUrl } from "@/apiInstance";
 import { ILoginData, IRegisterData } from "@/types/auth.types";
+import { cookies } from "next/headers";
 
 const registerUser = async (registerData: IRegisterData) => {
   try {
@@ -135,9 +137,41 @@ const resendOtp = async (email: string) => {
   }
 };
 
+export async function getUserInfo() {
+  try {
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+    const betterAuthToken = cookieStore.get("better-auth.session_token")?.value;
+
+    if (!accessToken) {
+      return null;
+    }
+    const url = new URL(buildApiUrl(API_ENDPOINTS.auth.me));
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `accessToken=${accessToken}; better-auth.session_token=${betterAuthToken}`,
+      },
+    });
+
+    if (!res.ok) {
+      console.error("Failed to fetch user info:", res.status, res.statusText);
+      return null;
+    }
+    const { data } = await res.json();
+    return data;
+  } catch (error: any) {
+    console.error("Error fetching user info:", error);
+    return null;
+  }
+}
+
 export const AuthServices = {
   registerUser,
   loginUser,
   verifyEmail,
   resendOtp,
+  getUserInfo,
 };
