@@ -23,7 +23,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 type AppFieldProps = {
   field: AnyFieldApi;
   label: string;
-  type?: "text" | "email" | "password" | "number" | "select";
+  type?: "text" | "email" | "password" | "number" | "select" | "date";
   placeholder?: string;
   append?: React.ReactNode;
   prepend?: React.ReactNode;
@@ -73,6 +73,8 @@ const AppField = ({
             disabled={disabled}
           >
             <SelectTrigger className={cn(
+              "w-full",
+              className,
               hasError && "border-destructive focus-visible:ring-destructive/20"
             )}>
               <SelectValue placeholder={placeholder} />

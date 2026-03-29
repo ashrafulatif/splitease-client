@@ -72,10 +72,6 @@ export const API_ENDPOINTS = {
     getAllSubscriptions: "/api/v1/subscription/",
     initiatePayment: (id: string) => `/api/v1/subscription/initiate-payment/${id}`,
   },
-  payments:{
-    getAllPayments: "/api/v1/payments",
-  }
-  
 } as const;
 
 export const buildApiUrl = (endpoint: string): string => {

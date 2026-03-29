@@ -44,7 +44,7 @@ export const managerNavItems: NavSection[] = [
       {
         title: "Meals",
         href: "/manager/dashboard/meals",
-        icon: "Meal",
+        icon: "Salad",
       },
       {
         title: "months",
