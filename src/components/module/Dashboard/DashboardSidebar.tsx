@@ -7,8 +7,14 @@ import { getUserInfo } from "@/service/auth.services";
 
 const DashboardSidebar = async () => {
   const userInfo = await getUserInfo();
+
+  if (!userInfo) {
+    return null; 
+  }
+
   const navItems: NavSection[] = getNavItemsByRole(userInfo.role);
   const dashboardHome = getDefaultDashboardRoute(userInfo.role);
+
 
   return (
     <DashboardSidebarContent
