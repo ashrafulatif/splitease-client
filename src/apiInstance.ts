@@ -12,6 +12,8 @@ export const API_ENDPOINTS = {
     verifyEmail: "/api/v1/auth/verify-email",
     resendOtp: "/api/v1/auth/resend-otp",
     me: "/api/v1/auth/me",
+    changePassword: "/api/v1/auth/change-password",
+    updateProfile: "/api/v1/auth/profile"
   },
   house: {
     getAllHouses: "/api/v1/houses",

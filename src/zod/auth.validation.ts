@@ -23,3 +23,27 @@ export const registerZodSchema = z.object({
     .min(1, "Password is required")
     .min(8, "Password must be at least 8 characters long"),
 });
+
+export const changePasswordBaseZodSchema = z.object({
+  currentPassword: z
+    .string()
+    .min(1, "Current password is required")
+    .min(8, "Password must be at least 8 characters long"),
+  newPassword: z
+    .string()
+    .min(1, "New password is required")
+    .min(8, "Password must be at least 8 characters long"),
+  confirmPassword: z
+    .string()
+    .min(1, "Confirm password is required")
+});
+
+export const changePasswordZodSchema = changePasswordBaseZodSchema.refine(data => data.newPassword === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"]
+});
+
+export const updateProfileZodSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  image: z.any().optional(),
+});

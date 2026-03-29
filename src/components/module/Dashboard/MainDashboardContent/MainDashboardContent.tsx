@@ -46,7 +46,7 @@ const MainDashboardContent = ({ stats, userInfo }: MainDashboardContentProps) =>
     return "Good Evening";
   };
   return (
-    <div className="space-y-6 animate-in fade-in zoom-in duration-700">
+    <div className="space-y-6">
       
       {/* Dynamic Hero Header */}
       <div className="relative overflow-hidden bg-primary/5 rounded-3xl p-6 md:p-8 border border-primary/10 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 group">

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { API_ENDPOINTS, buildApiUrl } from "@/apiInstance";
-import { ILoginData, IRegisterData } from "@/types/auth.types";
+import { IchagePasswordData, ILoginData, IRegisterData, IUpdateProfileData } from "@/types/auth.types";
 import { cookies } from "next/headers";
 
 const registerUser = async (registerData: IRegisterData) => {
@@ -168,10 +168,94 @@ export async function getUserInfo() {
   }
 }
 
+const changePassword = async (payload: IchagePasswordData) => {
+  try {
+
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+    const betterAuthToken = cookieStore.get("better-auth.session_token")?.value;
+
+    if (!accessToken) {
+      return null;
+    }
+    const url = new URL(buildApiUrl(API_ENDPOINTS.auth.changePassword));
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `accessToken=${accessToken}; better-auth.session_token=${betterAuthToken}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      return {
+        error: data.message,
+        data: null,
+      };
+    }
+
+    return {
+      message: data.message,
+      data: data.data,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: "Something went wrong",
+    };
+  }
+};
+
+const updateProfile = async (payload: FormData) => {
+  try {
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+    const betterAuthToken = cookieStore.get("better-auth.session_token")?.value;
+
+    if (!accessToken) {
+      return null;
+    }
+    const url = new URL(buildApiUrl(API_ENDPOINTS.auth.updateProfile));
+
+    const res = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        Cookie: `accessToken=${accessToken}; better-auth.session_token=${betterAuthToken}`,
+      },
+      body: payload,
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      return {
+        error: data.message,
+        data: null,
+      };
+    }
+
+    return {
+      message: data.message,
+      data: data.data,
+    };
+  } catch (error) {
+    return {
+      data: null,
+      error: "Something went wrong",
+    };
+  }
+};
+
 export const AuthServices = {
   registerUser,
   loginUser,
   verifyEmail,
   resendOtp,
   getUserInfo,
+  changePassword,
+  updateProfile
 };
