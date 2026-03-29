@@ -1,6 +1,6 @@
 "use server";
 
-import { AuthServices } from "@/service/auth.services";
+import { AuthServices } from "@/service/auth.service";
 import { IRegisterData } from "@/types/auth.types";
 
 export const registerUserAction = async (payload: IRegisterData) => {

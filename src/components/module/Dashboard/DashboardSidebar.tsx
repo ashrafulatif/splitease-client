@@ -3,7 +3,7 @@ import { getDefaultDashboardRoute } from "@/lib/authUtils";
 import { DashboardSidebarContent } from "./DashboardSidebarContent";
 import { NavSection } from "@/types/dashboard.type";
 import { getNavItemsByRole } from "@/lib/navItems";
-import { getUserInfo } from "@/service/auth.services";
+import { getUserInfo } from "@/service/auth.service";
 
 const DashboardSidebar = async () => {
   const userInfo = await getUserInfo();

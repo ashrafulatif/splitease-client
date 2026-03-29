@@ -1,6 +1,6 @@
 "use server";
 
-import { AuthServices } from "@/service/auth.services";
+import { AuthServices } from "@/service/auth.service";
 
 export const verifyEmailAction = async (otp: string, email: string) => {
   const result = await AuthServices.verifyEmail(otp, email);

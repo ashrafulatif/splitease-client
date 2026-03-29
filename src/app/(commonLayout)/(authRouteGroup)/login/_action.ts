@@ -5,7 +5,7 @@ import {
   UserRole,
 } from "@/lib/authUtils";
 import { setTokenInCookies } from "@/lib/tokenUtils";
-import { AuthServices } from "@/service/auth.services";
+import { AuthServices } from "@/service/auth.service";
 import { ILoginData } from "@/types/auth.types";
 
 export const loginUserAction = async (
