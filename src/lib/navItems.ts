@@ -84,11 +84,6 @@ export const adminNavItems: NavSection[] = [
         href: "/admin/dashboard/house-management",
         icon: "House",
       },
-      {
-        title: "Appointments",
-        href: "/admin/dashboard/appointments-management",
-        icon: "Calendar",
-      },
     ],
   },
   {
