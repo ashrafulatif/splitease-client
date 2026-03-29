@@ -11,7 +11,7 @@ const RootDashboardLayout = async ({
     <div className="flex h-screen overflow-hidden">
       {/* dashboard sidebar */}
       <DashboardSidebar />
-      <div className="flext flex-1 flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col overflow-hidden">
         {/* Dashboard Navbar */}
         <DashboardNavbar />
         {/* Dashboard content */}
