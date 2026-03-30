@@ -250,6 +250,31 @@ const updateProfile = async (payload: FormData) => {
   }
 };
 
+const logoutUser = async () => {
+  try {
+    const url = new URL(buildApiUrl(API_ENDPOINTS.auth.logout));
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+    const betterAuthToken = cookieStore.get("better-auth.session_token")?.value;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `accessToken=${accessToken}; better-auth.session_token=${betterAuthToken}`,
+      },
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return {
+      success: false,
+      message: "Something went wrong",
+    };
+  }
+};
+
 export const AuthServices = {
   registerUser,
   loginUser,
@@ -257,5 +282,6 @@ export const AuthServices = {
   resendOtp,
   getUserInfo,
   changePassword,
-  updateProfile
+  updateProfile,
+  logoutUser
 };

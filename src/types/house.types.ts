@@ -13,6 +13,7 @@ export interface IHouseUser {
   id: string;
   name: string;
   email: string;
+  image: string;
 }
 
 export interface IHouseMember {

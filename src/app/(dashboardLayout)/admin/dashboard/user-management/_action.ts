@@ -3,7 +3,7 @@
 import { UserServices } from "@/service/user.service";
 import {  updateTag } from "next/cache";
 
-export const updateUserStatusAction = async (id: string, status: "ACTIVE" | "BLOCKED") => {
+export const updateUserStatusAction = async (id: string, status: "ACTIVE" | "INACTIVE" | "SUSPENDED") => {
   try {
     const res = await UserServices.updateUserStatus(id, status);
 

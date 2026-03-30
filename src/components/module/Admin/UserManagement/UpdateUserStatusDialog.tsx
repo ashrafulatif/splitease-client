@@ -28,7 +28,7 @@ export const UpdateUserStatusDialog = ({
   if (!user) return null;
 
   const isBlocking = user.status === "ACTIVE";
-  const newStatus = isBlocking ? "BLOCKED" : "ACTIVE";
+  const newStatus = isBlocking ? "INACTIVE" : "ACTIVE";
 
   const handleUpdate = async () => {
     const toastId = toast.loading(`${isBlocking ? "Blocking" : "Unblocking"} user...`);

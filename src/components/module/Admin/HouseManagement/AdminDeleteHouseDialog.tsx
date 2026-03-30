@@ -12,37 +12,39 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { deleteUserAction } from "@/app/(dashboardLayout)/admin/dashboard/user-management/_action";
+import { deleteHouseAction } from "@/app/(dashboardLayout)/admin/dashboard/house-management/_action";
+import { IHouse } from "@/types/house.types";
 
-interface DeleteUserDialogProps {
+interface AdminDeleteHouseDialogProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  user: any;
+  house: IHouse | null;
 }
 
-export const DeleteUserDialog = ({
+export const AdminDeleteHouseDialog = ({
   open,
   setOpen,
-  user,
-}: DeleteUserDialogProps) => {
+  house,
+}: AdminDeleteHouseDialogProps) => {
   const [isPending, startTransition] = useTransition();
 
-  if (!user) return null;
+  if (!house) return null;
 
   const handleDelete = () => {
     startTransition(async () => {
+      const toastId = toast.loading(`Decommissioning ${house.name}...`);
       try {
-        const res = await deleteUserAction(user.id);
+        const res = await deleteHouseAction(house.id);
 
         if (!res.success) {
-          toast.error(res.message);
+          toast.error(res.message, { id: toastId });
           return;
         }
 
-        toast.success(res.message);
+        toast.success(res.message, { id: toastId });
         setOpen(false);
       } catch (error) {
-        toast.error("An unexpected error occurred");
+        toast.error("An unexpected error occurred", { id: toastId });
       }
     });
   };
@@ -53,8 +55,8 @@ export const DeleteUserDialog = ({
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the user
-            account for <span className="font-bold text-foreground">{user.name}</span> and remove all associated data.
+            This action cannot be undone. This will permanently delete the house
+            <span className="font-bold text-foreground"> {house.name}</span> and remove all associated infrastructure, residents, and financial data.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -64,7 +66,7 @@ export const DeleteUserDialog = ({
             disabled={isPending}
             className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
           >
-            {isPending ? "Deleting..." : "Permanently Delete"}
+            {isPending ? "Decommissioning..." : "Permanently Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

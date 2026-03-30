@@ -35,7 +35,7 @@ const getAllUsers = async () => {
   }
 };
 
-const updateUserStatus = async (id: string, status: "ACTIVE" | "BLOCKED") => {
+const updateUserStatus = async (id: string, status: "ACTIVE" | "INACTIVE" | "SUSPENDED") => {
   try {
     const cookieStorage = await cookies();
     const url = new URL(buildApiUrl(API_ENDPOINTS.users.updateUserStatus(id)));

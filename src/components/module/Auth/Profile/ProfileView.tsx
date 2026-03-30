@@ -57,9 +57,9 @@ const ProfileView = ({ user }: ProfileViewProps) => {
         <CardContent className="relative px-8 pb-8">
           <div className="flex flex-col md:flex-row items-end gap-6 -mt-12">
             <div className="relative group">
-              <Avatar className="h-32 w-32 border-4 border-white shadow-xl rounded-full ring-4 ring-primary/5 transition-transform duration-500 group-hover:scale-105">
+              <Avatar className="h-32 w-32 border-4 border-white shadow-md rounded-full ring-4 ring-primary/5 transition-transform duration-500 group-hover:scale-105">
                 <AvatarImage src={user.image} />
-                <AvatarFallback className="bg-primary text-white text-3xl font-black rounded-2xl">
+                <AvatarFallback className="bg-primary text-white text-3xl font-black rounded-full">
                   {initials}
                 </AvatarFallback>
               </Avatar>

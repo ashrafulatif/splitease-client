@@ -93,7 +93,7 @@ export function MainPieChart({
             {/* Donut on the left */}
             <ChartContainer
                 config={chartConfig}
-                className="aspect-square w-[140px] max-h-[140px]"
+                className="aspect-square w-[140px] h-[140px] shrink-0"
             >
                 <PieChart>
                     <ChartTooltip

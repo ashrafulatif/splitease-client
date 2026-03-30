@@ -4,6 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { getIconComponent } from "@/lib/iconMapper";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { NavSection } from "@/types/dashboard.type";
 
 import { UserInfo } from "@/types/user.type";
@@ -83,13 +84,14 @@ export const DashboardSidebarContent = ({
       </ScrollArea>
 
       {/* user info at bottom */}
-      <div className="border-t px-3 py-4">
+      <div className="border-t px-4 py-4 bg-muted/20">
         <div className="flex items-center gap-3">
-          <div className=" h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-            <span className="text-sm font-semibold text-primary">
+          <Avatar className="h-9 w-9 border border-border ring-2 ring-primary shadow-sm">
+            <AvatarImage src={userInfo.image} alt={userInfo.name} />
+            <AvatarFallback className="bg-primary/10 text-primary text-xs font-bold font-black">
               {userInfo.name.charAt(0).toUpperCase()}
-            </span>
-          </div>
+            </AvatarFallback>
+          </Avatar>
 
           <div className="flex-1 overflow-hidden">
             <p className="text-sm font-medium truncate">{userInfo.name}</p>
