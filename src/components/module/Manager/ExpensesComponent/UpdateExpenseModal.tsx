@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useForm } from "@tanstack/react-form";
@@ -14,7 +15,7 @@ import AppField from "../../shared/form/AppField";
 import AppSubmitButton from "../../shared/form/AppSubmitButton";
 import { updateExpenseByIdAction } from "@/app/(dashboardLayout)/manager/dashboard/expenses/_action";
 import { expenseZodSchema } from "@/zod/expense.validation";
-import { ReceiptText, Pencil } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { IHouse } from "@/types/house.types";
 import { IMonth } from "@/types/month.types";
 import { IExpense, IUpdateExpense } from "@/types/expense.types";
@@ -46,11 +47,11 @@ export const UpdateExpenseModal = ({
     },
     onSubmit: async ({ value }) => {
       const payload: IUpdateExpense = {
-          type: value.type,
-          amount: Number(value.amount),
-          description: value.description
+        type: value.type,
+        amount: Number(value.amount),
+        description: value.description,
       };
-      
+
       const result = await updateExpenseByIdAction(expense.id, payload);
       if (result?.error || result?.message === "Failed" || !result) {
         toast.error(result?.error || result?.message || "Something went wrong");
@@ -76,11 +77,13 @@ export const UpdateExpenseModal = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent showCloseButton className="max-w-lg">
         <DialogHeader>
-          <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center mb-4">
-            <Pencil className="w-6 h-6 text-amber-500" />
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
+            <Pencil className="w-6 h-6 text-primary" />
           </div>
-          <DialogTitle className="text-2xl font-bold tracking-tight text-foreground/90">Update Expense Detail</DialogTitle>
-          <DialogDescription className="font-medium text-muted-foreground/80">
+          <DialogTitle className="text-2xl font-semibold tracking-tight text-foreground">
+            Update Expense Detail
+          </DialogTitle>
+          <DialogDescription className="text-muted-foreground">
             Make changes to the selected house expense record.
           </DialogDescription>
         </DialogHeader>
@@ -94,40 +97,42 @@ export const UpdateExpenseModal = ({
             className="space-y-6"
           >
             <div className="grid grid-cols-2 gap-4 border-b pb-6">
-               <form.Field
-                 name="houseId"
-               >
-                 {() => (
-                   <div className="space-y-1.5 opacity-60">
-                      <span className="text-sm font-semibold text-muted-foreground uppercase tracking-widest leading-none">House</span>
-                      <div className="h-10 px-3 flex items-center bg-muted rounded-xl text-sm font-bold border border-muted/50 truncate">
-                         {houses.find(h => h.id === expense.houseId)?.name || "N/A"}
-                      </div>
-                   </div>
-                 )}
-               </form.Field>
+              <form.Field name="houseId">
+                {() => (
+                  <div className="space-y-1.5 opacity-70">
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider leading-none">
+                      House
+                    </span>
+                    <div className="h-10 px-3 flex items-center bg-muted rounded-xl text-sm font-medium border border-border truncate">
+                      {houses.find((h) => h.id === expense.houseId)?.name ||
+                        "N/A"}
+                    </div>
+                  </div>
+                )}
+              </form.Field>
 
-               <form.Field
-                 name="monthId"
-               >
-                 {() => (
-                   <div className="space-y-1.5 opacity-60">
-                      <span className="text-sm font-semibold text-muted-foreground uppercase tracking-widest leading-none">Month</span>
-                      <div className="h-10 px-3 flex items-center bg-muted rounded-xl text-sm font-bold border border-muted/50 truncate">
-                         {months.find(m => m.id === expense.monthId)?.name || "N/A"}
-                      </div>
-                   </div>
-                 )}
-               </form.Field>
+              <form.Field name="monthId">
+                {() => (
+                  <div className="space-y-1.5 opacity-70">
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider leading-none">
+                      Month
+                    </span>
+                    <div className="h-10 px-3 flex items-center bg-muted rounded-xl text-sm font-medium border border-border truncate">
+                      {months.find((m) => m.id === expense.monthId)?.name ||
+                        "N/A"}
+                    </div>
+                  </div>
+                )}
+              </form.Field>
             </div>
 
             <form.Field
               name="type"
-              validators={{ 
+              validators={{
                 onChange: ({ value }) => {
                   const res = expenseZodSchema.shape.type.safeParse(value);
                   return res.success ? undefined : res.error.issues[0].message;
-                }
+                },
               }}
             >
               {(field) => (
@@ -143,11 +148,11 @@ export const UpdateExpenseModal = ({
 
             <form.Field
               name="amount"
-              validators={{ 
+              validators={{
                 onChange: ({ value }) => {
                   const res = expenseZodSchema.shape.amount.safeParse(value);
                   return res.success ? undefined : res.error.issues[0].message;
-                }
+                },
               }}
             >
               {(field) => (
@@ -162,11 +167,12 @@ export const UpdateExpenseModal = ({
 
             <form.Field
               name="description"
-              validators={{ 
+              validators={{
                 onChange: ({ value }) => {
-                  const res = expenseZodSchema.shape.description.safeParse(value);
+                  const res =
+                    expenseZodSchema.shape.description.safeParse(value);
                   return res.success ? undefined : res.error.issues[0].message;
-                }
+                },
               }}
             >
               {(field) => (
@@ -180,20 +186,22 @@ export const UpdateExpenseModal = ({
             </form.Field>
 
             <div className="pt-2">
-                <form.Subscribe
-                selector={(state) => [state.isSubmitting, state.canSubmit] as const}
-                >
+              <form.Subscribe
+                selector={(state) =>
+                  [state.isSubmitting, state.canSubmit] as const
+                }
+              >
                 {([isSubmitting, canSubmit]) => (
-                    <AppSubmitButton 
-                    isPending={isSubmitting} 
+                  <AppSubmitButton
+                    isPending={isSubmitting}
                     pendingLabel="Saving..."
                     disabled={!canSubmit}
-                    className="h-12 text-[15px] font-extrabold rounded-xl"
-                    >
+                    className="h-12 text-sm font-semibold rounded-xl"
+                  >
                     Save Changes
-                    </AppSubmitButton>
+                  </AppSubmitButton>
                 )}
-                </form.Subscribe>
+              </form.Subscribe>
             </div>
           </form>
         </div>

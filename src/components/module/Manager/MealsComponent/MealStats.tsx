@@ -18,29 +18,29 @@ export const MealStats = ({
         MONTHLY SUMMARY
       </span>
       <div className="flex gap-4">
-        <div className="flex flex-col items-center p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 w-24">
-          <Coffee className="w-5 h-5 text-amber-500 mb-1" />
-          <span className="text-xl font-bold text-amber-600 block">
+        <div className="flex flex-col items-center p-3 rounded-2xl bg-chart-1/10 border border-chart-1/20 w-24">
+          <Coffee className="w-5 h-5 text-chart-1 mb-1" />
+          <span className="text-xl font-bold text-chart-1 block">
             {breakfasts}
           </span>
         </div>
-        <div className="flex flex-col items-center p-3 rounded-2xl bg-orange-500/10 border border-orange-500/20 w-24">
-          <Sun className="w-5 h-5 text-orange-500 mb-1" />
-          <span className="text-xl font-bold text-orange-600 block">
+        <div className="flex flex-col items-center p-3 rounded-2xl bg-chart-2/10 border border-chart-2/20 w-24">
+          <Sun className="w-5 h-5 text-chart-2 mb-1" />
+          <span className="text-xl font-bold text-chart-2 block">
             {lunches}
           </span>
         </div>
-        <div className="flex flex-col items-center p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 w-24">
-          <Moon className="w-5 h-5 text-indigo-500 mb-1" />
-          <span className="text-xl font-bold text-indigo-600 block">
+        <div className="flex flex-col items-center p-3 rounded-2xl bg-chart-3/10 border border-chart-3/20 w-24">
+          <Moon className="w-5 h-5 text-chart-3 mb-1" />
+          <span className="text-xl font-bold text-chart-3 block">
             {dinners}
           </span>
         </div>
-        <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 min-w-28">
-          <span className="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider mb-1">
+        <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-chart-4/10 border border-chart-4/20 min-w-28">
+          <span className="text-[10px] font-semibold text-chart-4 uppercase tracking-wider mb-1">
             Meal Rate
           </span>
-          <span className="text-xl font-bold text-emerald-600 block">
+          <span className="text-xl font-bold text-chart-4 block">
             {typeof mealRate === "number" ? mealRate.toFixed(2) : "0.00"}
           </span>
         </div>

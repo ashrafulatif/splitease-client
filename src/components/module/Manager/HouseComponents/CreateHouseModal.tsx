@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -17,6 +18,7 @@ import AppField from "../../shared/form/AppField";
 import AppSubmitButton from "../../shared/form/AppSubmitButton";
 import { createHouseAction } from "@/app/(dashboardLayout)/manager/dashboard/house/_action";
 import { houseZodSchema } from "@/zod/house.validation";
+import { Home } from "lucide-react";
 
 export const CreateHouseModal = () => {
   const [open, setOpen] = useState(false);
@@ -43,13 +45,17 @@ export const CreateHouseModal = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Add House</Button>
+        <Button className="py-4 px-6">Add House</Button>
       </DialogTrigger>
       <DialogContent showCloseButton>
         <DialogHeader>
-          <DialogTitle>Add New House</DialogTitle>
+            <DialogTitle className="flex items-center gap-2 text-xl font-semibold">
+            <Home className="h-5 w-5 text-primary" />
+            Add New House
+          </DialogTitle>
           <DialogDescription>
-            Enter the details of the new house. Click save when you're done.
+            Enter the details of the new house. Click save when you&apos;re
+            done.
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">
@@ -88,11 +94,13 @@ export const CreateHouseModal = () => {
             </form.Field>
 
             <form.Subscribe
-              selector={(state) => [state.isSubmitting, state.canSubmit] as const}
+              selector={(state) =>
+                [state.isSubmitting, state.canSubmit] as const
+              }
             >
               {([isSubmitting, canSubmit]) => (
-                <AppSubmitButton 
-                  isPending={isSubmitting} 
+                <AppSubmitButton
+                  isPending={isSubmitting}
                   pendingLabel="Saving..."
                   disabled={!canSubmit}
                 >
