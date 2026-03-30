@@ -1,39 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
-import { Plus, X, List } from "lucide-react";
+import { Edit, X, List, Plus } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import AppField from "../shared/form/AppField";
-import AppSubmitButton from "../shared/form/AppSubmitButton";
+import AppField from "../../shared/form/AppField";
+import AppSubmitButton from "../../shared/form/AppSubmitButton";
 import { planZodSchema } from "@/zod/plan.validation";
-import { createPlanAction } from "@/app/(dashboardLayout)/admin/dashboard/plans/_action";
+import { updatePlanAction } from "@/app/(dashboardLayout)/admin/dashboard/plans/_action";
+import { IPlan } from "@/types/plan.types";
 
-export const CreatePlanModal = () => {
-  const [open, setOpen] = useState(false);
+interface UpdatePlanModalProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  plan: IPlan;
+}
+
+export const UpdatePlanModal = ({ open, setOpen, plan }: UpdatePlanModalProps) => {
   const [featureInput, setFeatureInput] = useState("");
 
   const form = useForm({
     defaultValues: {
-      name: "",
-      price: 0,
-      durationDays: 30,
-      features: [] as string[],
+      name: plan.name,
+      price: plan.price,
+      durationDays: plan.durationDays,
+      features: [...plan.features],
     },
     onSubmit: async ({ value }) => {
-      const toastId = toast.loading("Creating plan...");
+      const toastId = toast.loading("Updating plan...");
       try {
-        const res = await createPlanAction(value);
+        const res = await updatePlanAction(plan.id, value);
 
         if (!res.success) {
           toast.error(res.message, { id: toastId });
@@ -41,13 +46,24 @@ export const CreatePlanModal = () => {
         }
 
         toast.success(res.message, { id: toastId });
-        form.reset();
         setOpen(false);
       } catch (error) {
         toast.error("Something went wrong", { id: toastId });
       }
     },
   });
+
+  // Reset form when plan changes or modal opens
+  useEffect(() => {
+    if (open) {
+      form.reset({
+        name: plan.name,
+        price: plan.price,
+        durationDays: plan.durationDays,
+        features: [...plan.features],
+      });
+    }
+  }, [open, plan, form]);
 
   const addFeature = () => {
     if (!featureInput.trim()) return;
@@ -66,22 +82,16 @@ export const CreatePlanModal = () => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="rounded-xl font-bold gap-2 shadow-lg shadow-primary/20">
-          <Plus className="w-4 h-4" />
-          Add New Plan
-        </Button>
-      </DialogTrigger>
       <DialogContent className="sm:max-w-[500px] rounded-3xl p-8 border-none shadow-2xl">
         <DialogHeader className="mb-6">
           <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 text-primary">
-            <Plus className="h-6 w-6" />
+            <Edit className="h-6 w-6" />
           </div>
           <DialogTitle className="text-2xl font-black tracking-tight">
-            Create Subscription Plan
+            Update Subscription Plan
           </DialogTitle>
           <DialogDescription className="font-medium text-muted-foreground pt-1">
-            Define a new pricing tier for your users.
+            Modify the pricing tier details.
           </DialogDescription>
         </DialogHeader>
 
@@ -151,10 +161,10 @@ export const CreatePlanModal = () => {
                 placeholder="Add a feature..."
                 className="rounded-xl"
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    addFeature();
-                  }
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addFeature();
+                    }
                 }}
               />
               <Button
@@ -189,16 +199,6 @@ export const CreatePlanModal = () => {
                       </button>
                     </div>
                   ))}
-                  {field.state.value.length === 0 && (
-                    <p className="text-[10px] text-muted-foreground text-center py-4 font-bold uppercase tracking-widest opacity-50">
-                      No features added yet
-                    </p>
-                  )}
-                  {field.state.meta.errors.length > 0 && (
-                    <p className="text-xs text-destructive font-bold">
-                      {String(field.state.meta.errors[0])}
-                    </p>
-                  )}
                 </div>
               )}
             </form.Field>
@@ -214,7 +214,7 @@ export const CreatePlanModal = () => {
                    disabled={!canSubmit}
                    className="rounded-xl h-12 font-bold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all font-black uppercase tracking-widest"
                 >
-                  Create Plan
+                  Update Plan
                 </AppSubmitButton>
               )}
             </form.Subscribe>

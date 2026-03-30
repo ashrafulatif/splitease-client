@@ -74,6 +74,12 @@ export const API_ENDPOINTS = {
     getAllSubscriptions: "/api/v1/subscription/",
     initiatePayment: (id: string) => `/api/v1/subscription/initiate-payment/${id}`,
   },
+  users:{
+    getAllUsers: "/api/v1/users",
+    updateUserStatus: (id: string) => `/api/v1/users/update-status/${id}`,
+    deleteUser: (id: string) => `/api/v1/users/delete/${id}`,
+    getUserById: (id: string) => `/api/v1/users/${id}`,
+  }
 } as const;
 
 export const buildApiUrl = (endpoint: string): string => {

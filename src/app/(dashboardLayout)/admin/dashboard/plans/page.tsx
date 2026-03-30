@@ -1,4 +1,4 @@
-import PlanView from "@/components/module/Plan/PlanView";
+import PlanView from "@/components/module/Admin/Plan/PlanView";
 import { PlanServices } from "@/service/plans.service";
 import { Metadata } from "next";
 
