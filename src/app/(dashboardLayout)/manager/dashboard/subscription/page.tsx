@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import ManagerSubscriptionView from "@/components/module/Manager/SubscriptionComponet/ManagerSubscriptionView";
+import ManagerSubscriptionView from "@/components/module/Common/SubscriptionComponet/ManagerSubscriptionView";
 import { getMySubscriptionAction, getAllPlansAction } from "./_action";
 
 const SubscriptionPage = async () => {

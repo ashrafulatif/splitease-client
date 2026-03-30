@@ -1,8 +1,8 @@
 "use server";
 
-import { HouseServices } from "@/service/manager-service/house.service";
+import { HouseServices } from "@/service/house.service";
 import { ICreateHouse } from "@/types/house.types";
-import {  updateTag } from "next/cache";
+import { updateTag } from "next/cache";
 
 export const updateHouseAction = async (id: string, payload: ICreateHouse) => {
   try {

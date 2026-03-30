@@ -1,6 +1,6 @@
 "use server";
 
-import { MonthServices } from "@/service/manager-service/month.service";
+import { MonthServices } from "@/service/month.service";
 import { updateTag } from "next/cache";
 
 export const createMonthAction = async (payload: any) => {
@@ -25,7 +25,7 @@ export const getFullMonthDataByIdAction = async (id: string) => {
 
 export const deleteMonthAction = async (id: string) => {
   const result = await MonthServices.deleteMonth(id);
-  
+
   //revalidate
   updateTag("months");
   return result;

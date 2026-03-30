@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import MealView from "@/components/module/Manager/MealsComponent/MealView";
+import MealView from "@/components/module/Common/MealsComponent/MealView";
 import { Metadata } from "next";
 import { getMyHouseAction } from "../house/_action";
 import { getHouseMonthsAction } from "../months/_action";
 import { getMealsByMonthAction } from "./_action";
 import { getUserInfo } from "@/service/auth.service";
-import { DashboardService } from "@/service/manager-service/Dashboard.service";
+import { DashboardService } from "@/service/Dashboard.service";
 
 const MealsPage = async (props: {
   searchParams: Promise<{ house?: string; month?: string }>;

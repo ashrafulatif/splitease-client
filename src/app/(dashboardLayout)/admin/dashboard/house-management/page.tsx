@@ -1,6 +1,6 @@
 import AdminHouseView from "@/components/module/Admin/HouseManagement/AdminHouseView";
 
-import { HouseServices } from "@/service/manager-service/house.service";
+import { HouseServices } from "@/service/house.service";
 
 const AdminHouseManagement = async () => {
   const { data: houses = [] } = await HouseServices.getAllHouses();

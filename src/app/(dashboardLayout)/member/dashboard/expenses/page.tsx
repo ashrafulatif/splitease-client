@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Metadata } from "next";
-import ExpensesView from "@/components/module/Manager/ExpensesComponent/ExpensesView";
+import ExpensesView from "@/components/module/Common/ExpensesComponent/ExpensesView";
 
 import { getMyHouseAction } from "@/app/(dashboardLayout)/manager/dashboard/house/_action";
 import { getHouseMonthsAction } from "@/app/(dashboardLayout)/manager/dashboard/months/_action";

@@ -5,8 +5,8 @@ import { toast } from "sonner";
 import { IPlan } from "@/types/plan.types";
 import { IPayment, ISubscription } from "@/types/subscription.types";
 import { initiatePaymentAction } from "@/app/(dashboardLayout)/manager/dashboard/subscription/_action";
-import SubscriptionCurrentCard from "@/components/module/Manager/SubscriptionComponet/SubscriptionCurrentCard";
-import SubscriptionPlanCard from "@/components/module/Manager/SubscriptionComponet/SubscriptionPlanCard";
+import SubscriptionCurrentCard from "@/components/module/Common/SubscriptionComponet/SubscriptionCurrentCard";
+import SubscriptionPlanCard from "@/components/module/Common/SubscriptionComponet/SubscriptionPlanCard";
 
 interface ManagerSubscriptionViewProps {
   plans: IPlan[];

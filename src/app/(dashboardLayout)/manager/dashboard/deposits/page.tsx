@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { getMyHouseAction } from "../house/_action";
 import { getHouseMonthsAction } from "../months/_action";
 import { getDepositsByMonthAction } from "./_action";
-import { DepositView } from "@/components/module/Manager/DepositComponents/DepositView";
+import { DepositView } from "@/components/module/Common/DepositComponents/DepositView";
 import { getHouseMembersAction } from "../members/_action";
 
 const DepositsPage = async (props: {

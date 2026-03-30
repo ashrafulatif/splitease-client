@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 import MainDashboardContent from "@/components/module/Dashboard/MainDashboardContent/MainDashboardContent";
 import { getUserInfo } from "@/service/auth.service";
-import { DashboardService } from "@/service/manager-service/Dashboard.service";
+import { DashboardService } from "@/service/Dashboard.service";
 
 const ManagerDashboard = async () => {
   const userInfo = await getUserInfo();
-const statsRes = await DashboardService.getDashboardSummary();
+  const statsRes = await DashboardService.getDashboardSummary();
   const stats = statsRes?.data || null;
 
-  const roleTitle = "Manager Dashboard"
+  const roleTitle = "Manager Dashboard";
 
   return (
     <div className="p-4 md:p-6 md:max-w-6xl mx-auto w-full min-h-screen">

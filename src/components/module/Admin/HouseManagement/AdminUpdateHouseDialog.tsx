@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useForm } from "@tanstack/react-form";
@@ -26,17 +27,15 @@ export const AdminUpdateHouseDialog = ({
   setOpen,
   house,
 }: AdminUpdateHouseDialogProps) => {
-  if (!house) return null;
-
   const form = useForm({
     defaultValues: {
-      name: house.name || "",
-      description: house.description || "",
+      name: house?.name || "",
+      description: house?.description || "",
     },
     onSubmit: async ({ value }) => {
       const toastId = toast.loading("Updating house infrastructure...");
       try {
-        const res = await updateHouseAction(house.id, value);
+        const res = await updateHouseAction(house?.id as string, value);
 
         if (!res.success) {
           toast.error(res.message, { id: toastId });
@@ -51,11 +50,15 @@ export const AdminUpdateHouseDialog = ({
     },
   });
 
+  if (!house) return null;
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="rounded-3xl border-border/50 max-w-[450px]">
         <DialogHeader className="space-y-1">
-          <DialogTitle className="text-2xl font-black tracking-tight">Modify Infrastructure</DialogTitle>
+          <DialogTitle className="text-2xl font-black tracking-tight">
+            Modify Infrastructure
+          </DialogTitle>
           <DialogDescription className="text-sm font-medium text-muted-foreground">
             Update the identity and descriptive metadata for **{house.name}**.
           </DialogDescription>
@@ -100,7 +103,9 @@ export const AdminUpdateHouseDialog = ({
             </form.Field>
 
             <form.Subscribe
-              selector={(state) => [state.isSubmitting, state.canSubmit] as const}
+              selector={(state) =>
+                [state.isSubmitting, state.canSubmit] as const
+              }
             >
               {([isSubmitting, canSubmit]) => (
                 <AppSubmitButton

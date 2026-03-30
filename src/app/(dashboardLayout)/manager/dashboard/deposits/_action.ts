@@ -1,7 +1,10 @@
 "use server";
 
-import { DepositServices } from "@/service/manager-service/deposits.service";
-import { ICreateDepositPayload, IUpdateDepositPayload } from "@/types/deposits.types";
+import { DepositServices } from "@/service/deposits.service";
+import {
+  ICreateDepositPayload,
+  IUpdateDepositPayload,
+} from "@/types/deposits.types";
 import { updateTag } from "next/cache";
 
 export const createDepositAction = async (payload: ICreateDepositPayload) => {

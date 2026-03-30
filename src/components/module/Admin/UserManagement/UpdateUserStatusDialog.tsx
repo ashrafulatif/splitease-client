@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { toast } from "sonner";
-import { UserX, UserCheck, AlertCircle } from "lucide-react";
+import { UserX, UserCheck } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,

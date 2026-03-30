@@ -1,4 +1,4 @@
-import HouseView from "@/components/module/Manager/HouseComponents/HouseView";
+import HouseView from "@/components/module/Common/HouseComponents/HouseView";
 import { Metadata } from "next";
 import { getMyHouseAction } from "./_action";
 

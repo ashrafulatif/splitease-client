@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Metadata } from "next";
 
-import { DepositView } from "@/components/module/Manager/DepositComponents/DepositView";
+import { DepositView } from "@/components/module/Common/DepositComponents/DepositView";
 import { getMyHouseAction } from "@/app/(dashboardLayout)/manager/dashboard/house/_action";
 import { getHouseMonthsAction } from "@/app/(dashboardLayout)/manager/dashboard/months/_action";
 import { getHouseMembersAction } from "@/app/(dashboardLayout)/manager/dashboard/members/_action";

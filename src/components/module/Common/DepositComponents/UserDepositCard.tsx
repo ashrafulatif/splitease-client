@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -103,7 +104,7 @@ export const UserDepositCard = ({
                             </span>
                             {deposit.note && (
                                 <p className="text-[11px] text-muted-foreground mt-2 bg-muted/50 p-2 rounded-lg border leading-relaxed line-clamp-2">
-                                   "{deposit.note}"
+                                   &ldquo;{deposit.note}&rdquo;
                                 </p>
                             )}
                           </div>

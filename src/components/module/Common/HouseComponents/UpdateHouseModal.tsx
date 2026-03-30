@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useForm } from "@tanstack/react-form";
@@ -52,7 +53,7 @@ export const UpdateHouseModal = ({
         <DialogHeader>
           <DialogTitle>Update House</DialogTitle>
           <DialogDescription>
-            Update the details of your house. Click save when you're done.
+            Update the details of your house. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">

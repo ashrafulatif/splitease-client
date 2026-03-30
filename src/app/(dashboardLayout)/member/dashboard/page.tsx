@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import MainDashboardContent from "@/components/module/Dashboard/MainDashboardContent/MainDashboardContent";
 import { getUserInfo } from "@/service/auth.service";
-import { DashboardService } from "@/service/manager-service/Dashboard.service";
+import { DashboardService } from "@/service/Dashboard.service";
 
 const MemberDashboard = async () => {
   const userInfo = await getUserInfo();

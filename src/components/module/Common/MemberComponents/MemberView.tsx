@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -100,7 +101,7 @@ const MemberView = ({ members = [], houses = [], selectedHouseId }: { members?: 
                     <div className="rounded-full bg-muted p-3">
                       <Users className="w-6 h-6 text-muted-foreground" />
                     </div>
-                    <span>No members found. Click "Add Member" to invite someone.</span>
+                    <span>No members found. Click &apos;Add Member&apos; to invite someone.</span>
                   </div>
                 </TableCell>
               </TableRow>

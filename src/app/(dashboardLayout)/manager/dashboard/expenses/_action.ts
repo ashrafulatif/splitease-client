@@ -1,6 +1,6 @@
 "use server";
 
-import { ExpenseServices } from "@/service/manager-service/expenses.service";
+import { ExpenseServices } from "@/service/expenses.service";
 import { ICreateExpense, IUpdateExpense } from "@/types/expense.types";
 import { updateTag } from "next/cache";
 
@@ -42,4 +42,3 @@ export const deleteExpenseAction = async (id: string) => {
   updateTag("expenses");
   return result;
 };
-

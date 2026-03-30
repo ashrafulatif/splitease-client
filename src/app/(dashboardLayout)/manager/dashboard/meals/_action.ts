@@ -1,6 +1,6 @@
 "use server";
 
-import { MealServices } from "@/service/manager-service/meal.service";
+import { MealServices } from "@/service/meal.service";
 import { IMeal, IUpdateMeal } from "@/types/meal.types";
 import { updateTag } from "next/cache";
 
@@ -35,7 +35,7 @@ export const updateMealByIdAction = async (
 
 export const deleteMealAction = async (id: string) => {
   const result = await MealServices.deleteMeal(id);
-  
+
   //revalidate
   updateTag("meals");
   return result;

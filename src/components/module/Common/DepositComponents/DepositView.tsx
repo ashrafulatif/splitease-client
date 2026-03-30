@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
-import { Plus, PiggyBank, Search } from "lucide-react";
+import { PiggyBank } from "lucide-react";
 import { IHouse } from "@/types/house.types";
 import { IMonth } from "@/types/month.types";
 import { IDeposit } from "@/types/deposits.types";
@@ -109,8 +110,8 @@ export const DepositView = ({
           </div>
           <h3 className="text-lg font-bold">No deposits yet</h3>
           <p className="text-muted-foreground text-sm max-w-sm text-center mt-1">
-            There are no deposit records for the selected month. Click "Log
-            Deposit" to add your first entry.
+            There are no deposit records for the selected month. Click &quot;Log
+            Deposit&quot; to add your first entry.
           </p>
         </div>
       ) : (

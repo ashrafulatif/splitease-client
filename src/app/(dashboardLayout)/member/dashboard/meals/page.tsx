@@ -2,9 +2,9 @@
 import { getMyHouseAction } from "@/app/(dashboardLayout)/manager/dashboard/house/_action";
 import { getMealsByMonthAction } from "@/app/(dashboardLayout)/manager/dashboard/meals/_action";
 import { getHouseMonthsAction } from "@/app/(dashboardLayout)/manager/dashboard/months/_action";
-import MealView from "@/components/module/Manager/MealsComponent/MealView";
+import MealView from "@/components/module/Common/MealsComponent/MealView";
 import { getUserInfo } from "@/service/auth.service";
-import { DashboardService } from "@/service/manager-service/Dashboard.service";
+import { DashboardService } from "@/service/Dashboard.service";
 import { Metadata } from "next";
 
 const MemberMealsPage = async (props: {
