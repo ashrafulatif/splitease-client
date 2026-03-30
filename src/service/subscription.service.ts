@@ -73,11 +73,11 @@ const getAllSubscriptions = async () => {
   }
 };
 
-const initiatePayment = async (id: string) => {
+const initiatePayment = async (planId: string) => {
   try {
     const cookieStorage = await cookies();
     const url = new URL(
-      buildApiUrl(API_ENDPOINTS.subscriptions.initiatePayment(id)),
+      buildApiUrl(API_ENDPOINTS.subscriptions.initiatePayment(planId)),
     );
 
     const res = await fetch(url, {

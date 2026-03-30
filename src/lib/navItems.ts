@@ -61,6 +61,11 @@ export const managerNavItems: NavSection[] = [
         href: "/manager/dashboard/deposits",
         icon: "Wallet",
       },
+      {
+        title: "Subscriptions",
+        href: "/manager/dashboard/subscription",
+        icon: "Card",
+      },
     ],
   },
 ];
@@ -120,7 +125,7 @@ export const memberNavItems: NavSection[] = [
       {
         title: "Expenses",
         href: "/member/dashboard/expenses",
-        icon: "CreditCard",
+        icon: "Creditcard",
       },
     ],
   },
