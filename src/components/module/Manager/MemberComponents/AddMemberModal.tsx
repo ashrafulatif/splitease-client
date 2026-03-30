@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -33,7 +34,7 @@ export const AddMemberModal = ({ houses }: { houses: any[] }) => {
       if (result?.error || result?.message === "Failed" || !result) {
         toast.error(result?.error || result?.message || "Something went wrong");
       } else {
-        toast.success(result?.message || "Member added successfully");
+        toast.success(result?.message || "Member added successfully. Check your email for credentials.");
         setOpen(false);
         form.reset();
         router.refresh();
