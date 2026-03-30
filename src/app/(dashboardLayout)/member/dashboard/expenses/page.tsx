@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import MealView from "@/components/module/Manager/MealsComponent/MealView";
 import { Metadata } from "next";
-import { getMyHouseAction } from "../house/_action";
-import { getHouseMonthsAction } from "../months/_action";
-import { getMealsByMonthAction } from "./_action";
-import { getUserInfo } from "@/service/auth.service";
-import { DashboardService } from "@/service/manager-service/Dashboard.service";
+import ExpensesView from "@/components/module/Manager/ExpensesComponent/ExpensesView";
 
-const MealsPage = async (props: {
+import { getMyHouseAction } from "@/app/(dashboardLayout)/manager/dashboard/house/_action";
+import { getHouseMonthsAction } from "@/app/(dashboardLayout)/manager/dashboard/months/_action";
+import { getExpensesByMonthAction } from "@/app/(dashboardLayout)/manager/dashboard/expenses/_action";
+import { getUserInfo } from "@/service/auth.service";
+
+const MemberExpensesPage = async (props: {
   searchParams: Promise<{ house?: string; month?: string }>;
 }) => {
   const searchParams = await props.searchParams;
@@ -29,37 +29,29 @@ const MealsPage = async (props: {
     months.find((m: any) => !m.isClosed)?.id ||
     months[0]?.id;
 
-  let meals = [];
+  let expenses = [];
   if (selectedMonthId) {
-    const mealsRes = await getMealsByMonthAction(selectedMonthId);
-    meals = mealsRes?.data || [];
-  }
-
-  let mealRate = 0;
-  if (selectedMonthId) {
-    const monthlySummaryRes =
-      await DashboardService.getMonthlySummary(selectedMonthId);
-    mealRate = monthlySummaryRes?.data?.mealRate || 0;
+    const expensesRes = await getExpensesByMonthAction(selectedMonthId);
+    expenses = expensesRes?.data || [];
   }
 
   return (
     <div className="p-4 md:p-6 md:max-w-6xl mx-auto w-full">
-      <MealView
-        meals={meals}
+      <ExpensesView
+        expenses={expenses}
         houses={houses}
         months={months}
         selectedHouseId={selectedHouseId}
         selectedMonthId={selectedMonthId}
         currentUserRole={userInfo?.role}
-        mealRate={mealRate}
       />
     </div>
   );
 };
 
 export const metadata: Metadata = {
-  title: "Meals",
-  description: "Manage your house meals and distributions",
+  title: "Expenses",
+  description: "Track and manage house overheads and utilities",
 };
 
-export default MealsPage;
+export default MemberExpensesPage;

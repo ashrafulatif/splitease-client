@@ -11,6 +11,7 @@ import { ExpenseCard } from "./ExpenseCard";
 import { AddExpenseModal } from "./AddExpenseModal";
 import { UpdateExpenseModal } from "./UpdateExpenseModal";
 import { RemoveExpenseDialog } from "./RemoveExpenseDialog";
+import { UserRole } from "@/lib/authUtils";
 
 interface ExpensesViewProps {
   expenses: IExpense[];
@@ -18,6 +19,7 @@ interface ExpensesViewProps {
   months: IMonth[];
   selectedHouseId?: string;
   selectedMonthId?: string;
+  currentUserRole?: UserRole;
 }
 
 const ExpensesView = ({
@@ -26,6 +28,7 @@ const ExpensesView = ({
   months = [],
   selectedHouseId,
   selectedMonthId,
+  currentUserRole,
 }: ExpensesViewProps) => {
   const [selectedExpense, setSelectedExpense] = useState<IExpense | null>(null);
   const [isAddOpen, setIsAddOpen] = useState(false);
@@ -57,14 +60,16 @@ const ExpensesView = ({
               Manage utilities, rent, and overheads for this month.
             </p>
           </div>
-          <AddExpenseModal
-            open={isAddOpen}
-            setOpen={setIsAddOpen}
-            houses={houses}
-            months={months}
-            defaultHouseId={selectedHouseId}
-            defaultMonthId={selectedMonthId}
-          />
+          {currentUserRole !== "MEMBER" && (
+            <AddExpenseModal
+              open={isAddOpen}
+              setOpen={setIsAddOpen}
+              houses={houses}
+              months={months}
+              defaultHouseId={selectedHouseId}
+              defaultMonthId={selectedMonthId}
+            />
+          )}
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8 relative z-10">
@@ -86,7 +91,8 @@ const ExpensesView = ({
           </div>
           <h3 className="text-lg font-bold">No expenses found</h3>
           <p className="text-muted-foreground text-sm max-w-sm text-center mt-1">
-            There are no expense records for the selected month. Click "Record Expense" to add your first entry.
+            There are no expense records for the selected month. Click &quot;Record
+            Expense&quot; to add your first entry.
           </p>
         </div>
       ) : (

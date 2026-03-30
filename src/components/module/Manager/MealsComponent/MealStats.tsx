@@ -1,7 +1,13 @@
 import { Coffee, Sun, Moon } from "lucide-react";
 import { IMealRecord } from "@/types/meal.types";
 
-export const MealStats = ({ meals = [] }: { meals?: IMealRecord[] }) => {
+export const MealStats = ({
+  meals = [],
+  mealRate,
+}: {
+  meals?: IMealRecord[];
+  mealRate?: number;
+}) => {
   const breakfasts = meals.filter((m) => m.mealType === "BREAKFAST").length;
   const lunches = meals.filter((m) => m.mealType === "LUNCH").length;
   const dinners = meals.filter((m) => m.mealType === "DINNER").length;
@@ -28,6 +34,14 @@ export const MealStats = ({ meals = [] }: { meals?: IMealRecord[] }) => {
           <Moon className="w-5 h-5 text-indigo-500 mb-1" />
           <span className="text-xl font-bold text-indigo-600 block">
             {dinners}
+          </span>
+        </div>
+        <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 min-w-28">
+          <span className="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider mb-1">
+            Meal Rate
+          </span>
+          <span className="text-xl font-bold text-emerald-600 block">
+            {typeof mealRate === "number" ? mealRate.toFixed(2) : "0.00"}
           </span>
         </div>
       </div>

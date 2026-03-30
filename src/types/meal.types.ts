@@ -1,6 +1,7 @@
 export interface IMeal {
   monthId: string;
   houseId: string;
+  userId: string;
   date: string;
   mealType: "BREAKFAST" | "LUNCH" | "DINNER";
 }

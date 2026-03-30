@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { getMyHouseAction } from "@/app/(dashboardLayout)/manager/dashboard/house/_action";
+import { getMealsByMonthAction } from "@/app/(dashboardLayout)/manager/dashboard/meals/_action";
+import { getHouseMonthsAction } from "@/app/(dashboardLayout)/manager/dashboard/months/_action";
 import MealView from "@/components/module/Manager/MealsComponent/MealView";
-import { Metadata } from "next";
-import { getMyHouseAction } from "../house/_action";
-import { getHouseMonthsAction } from "../months/_action";
-import { getMealsByMonthAction } from "./_action";
 import { getUserInfo } from "@/service/auth.service";
 import { DashboardService } from "@/service/manager-service/Dashboard.service";
+import { Metadata } from "next";
 
-const MealsPage = async (props: {
+const MemberMealsPage = async (props: {
   searchParams: Promise<{ house?: string; month?: string }>;
 }) => {
   const searchParams = await props.searchParams;
@@ -62,4 +62,4 @@ export const metadata: Metadata = {
   description: "Manage your house meals and distributions",
 };
 
-export default MealsPage;
+export default MemberMealsPage;

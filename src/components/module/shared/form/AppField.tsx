@@ -30,6 +30,7 @@ type AppFieldProps = {
   className?: string;
   disabled?: boolean;
   options?: { value: string; label: string }[];
+  onValueChange?: (value: string | number) => void;
 };
 
 const AppField = ({
@@ -42,6 +43,7 @@ const AppField = ({
   className,
   disabled = false,
   options,
+  onValueChange,
 }: AppFieldProps) => {
   const firstError =
     field.state.meta.isTouched && field.state.meta.errors.length > 0
@@ -69,7 +71,10 @@ const AppField = ({
         {type === "select" && options ? (
           <Select
             value={field.state.value}
-            onValueChange={(value) => field.handleChange(value)}
+            onValueChange={(value) => {
+              field.handleChange(value);
+              onValueChange?.(value);
+            }}
             disabled={disabled}
           >
             <SelectTrigger className={cn(
@@ -98,6 +103,7 @@ const AppField = ({
             onChange={(e) => {
               const value = type === "number" ? Number(e.target.value) : e.target.value;
               field.handleChange(value as any);
+              onValueChange?.(value);
             }}
             disabled={disabled}
             aria-invalid={hasError}

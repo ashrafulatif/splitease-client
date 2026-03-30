@@ -11,6 +11,7 @@ import { UserDepositCard } from "./UserDepositCard";
 import { AddDepositModal } from "./AddDepositModal";
 import { UpdateDepositModal } from "./UpdateDepositModal";
 import { RemoveDepositDialog } from "./RemoveDepositDialog";
+import { UserRole } from "@/lib/authUtils";
 
 interface DepositViewProps {
   deposits: IDeposit[];
@@ -19,6 +20,7 @@ interface DepositViewProps {
   members: any[];
   selectedHouseId?: string;
   selectedMonthId?: string;
+  currentUserRole?: UserRole;
 }
 
 export const DepositView = ({
@@ -28,6 +30,7 @@ export const DepositView = ({
   members = [],
   selectedHouseId,
   selectedMonthId,
+  currentUserRole,
 }: DepositViewProps) => {
   const [selectedDeposit, setSelectedDeposit] = useState<IDeposit | null>(null);
   const [isAddOpen, setIsAddOpen] = useState(false);
@@ -74,15 +77,17 @@ export const DepositView = ({
               Track member contributions and funds.
             </p>
           </div>
-          <AddDepositModal
-            open={isAddOpen}
-            setOpen={setIsAddOpen}
-            houses={houses}
-            months={months}
-            members={members}
-            defaultHouseId={selectedHouseId}
-            defaultMonthId={selectedMonthId}
-          />
+          {currentUserRole !== "MEMBER" && (
+            <AddDepositModal
+              open={isAddOpen}
+              setOpen={setIsAddOpen}
+              houses={houses}
+              months={months}
+              members={members}
+              defaultHouseId={selectedHouseId}
+              defaultMonthId={selectedMonthId}
+            />
+          )}
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8 relative z-10">
@@ -104,7 +109,8 @@ export const DepositView = ({
           </div>
           <h3 className="text-lg font-bold">No deposits yet</h3>
           <p className="text-muted-foreground text-sm max-w-sm text-center mt-1">
-            There are no deposit records for the selected month. Click "Log Deposit" to add your first entry.
+            There are no deposit records for the selected month. Click "Log
+            Deposit" to add your first entry.
           </p>
         </div>
       ) : (

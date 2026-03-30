@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -33,12 +34,36 @@ export const AddMealModal = ({
   defaultMonthId?: string; 
 }) => {
   const [open, setOpen] = useState(false);
+  const [selectedHouseId, setSelectedHouseId] = useState(defaultHouseId || "");
   const router = useRouter();
+
+  const getMemberOptionsByHouse = (houseId: string) => {
+    const selectedHouse = houses.find((house) => house.id === houseId);
+
+    if (!selectedHouse) return [];
+
+    const creatorOption = selectedHouse.creator
+      ? [{ value: selectedHouse.creator.id, label: `${selectedHouse.creator.name} (Owner)` }]
+      : [];
+
+    const memberOptions = (selectedHouse.members || []).map((member) => ({
+      value: member.userId,
+      label: member.user?.name || "Unknown",
+    }));
+
+    const mergedOptions = [...creatorOption, ...memberOptions];
+    const uniqueMap = new Map(mergedOptions.map((option) => [option.value, option]));
+
+    return Array.from(uniqueMap.values());
+  };
+
+  const memberOptions = getMemberOptionsByHouse(selectedHouseId);
 
   const form = useForm({
     defaultValues: {
       houseId: defaultHouseId || "",
       monthId: defaultMonthId || "",
+      userId: memberOptions[0]?.value || "",
       date: new Date().toISOString().split('T')[0],
       mealType: "LUNCH" as "BREAKFAST" | "LUNCH" | "DINNER",
     },
@@ -100,6 +125,13 @@ export const AddMealModal = ({
                      type="select"
                      label="House"
                      placeholder="Select house"
+                     onValueChange={(value) => {
+                       const nextHouseId = String(value);
+                       setSelectedHouseId(nextHouseId);
+
+                       const nextMemberOptions = getMemberOptionsByHouse(nextHouseId);
+                       form.setFieldValue("userId", nextMemberOptions[0]?.value || "");
+                     }}
                      options={houses?.map(h => ({
                        value: h.id,
                        label: h.name,
@@ -131,6 +163,26 @@ export const AddMealModal = ({
                  )}
                </form.Field>
             </div>
+
+            <form.Field
+              name="userId"
+              validators={{ 
+                onChange: ({ value }) => {
+                  const res = mealZodSchema.shape.userId.safeParse(value);
+                  return res.success ? undefined : res.error.issues[0].message;
+                }
+              }}
+            >
+              {(field) => (
+                <AppField
+                  field={field as any}
+                  type="select"
+                  label="Select Member"
+                  placeholder="Choose member"
+                  options={memberOptions}
+                />
+              )}
+            </form.Field>
 
             <form.Field
               name="date"

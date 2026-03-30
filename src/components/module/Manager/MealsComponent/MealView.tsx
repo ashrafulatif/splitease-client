@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -8,6 +9,9 @@ import { MealFilters } from "./MealFilters";
 import { MealStats } from "./MealStats";
 import { UserMealCard } from "./UserMealCard";
 import { CalendarOff } from "lucide-react";
+import { IMonth } from "@/types/month.types";
+import { IHouse } from "@/types/house.types";
+import { UserRole } from "@/lib/authUtils";
 
 const MealView = ({
   meals = [],
@@ -15,12 +19,16 @@ const MealView = ({
   months = [],
   selectedHouseId,
   selectedMonthId,
+  currentUserRole,
+  mealRate,
 }: {
   meals?: any[];
-  houses?: any[];
-  months?: any[];
+  houses: IHouse[];
+  months: IMonth[];
   selectedHouseId?: string;
   selectedMonthId?: string;
+  currentUserRole?: UserRole;
+  mealRate?: number;
 }) => {
   const [selectedMeal, setSelectedMeal] = useState<any>(null);
   const [isRemoveOpen, setIsRemoveOpen] = useState(false);
@@ -67,12 +75,14 @@ const MealView = ({
               Log and track all daily house meals
             </p>
           </div>
-          <AddMealModal
-            houses={houses}
-            months={months}
-            defaultHouseId={selectedHouseId}
-            defaultMonthId={selectedMonthId}
-          />
+          {currentUserRole !== "MEMBER" && (
+            <AddMealModal
+              houses={houses}
+              months={months}
+              defaultHouseId={selectedHouseId}
+              defaultMonthId={selectedMonthId}
+            />
+          )}
         </div>
 
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8 relative z-10">
@@ -82,7 +92,7 @@ const MealView = ({
             selectedHouseId={selectedHouseId}
             selectedMonthId={selectedMonthId}
           />
-          <MealStats meals={meals} />
+          <MealStats meals={meals} mealRate={mealRate} />
         </div>
       </div>
 
@@ -94,7 +104,8 @@ const MealView = ({
           </div>
           <h3 className="text-lg font-bold">No meals yet</h3>
           <p className="text-muted-foreground text-sm max-w-sm text-center mt-1">
-            There are no meal logs for the selected month. Click "Log Meal" to add your first entry.
+            There are no meal logs for the selected month. Click &quot;Log
+            Meal&quot; to add your first entry.
           </p>
         </div>
       ) : (

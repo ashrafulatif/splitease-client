@@ -109,22 +109,17 @@ export const memberNavItems: NavSection[] = [
     items: [
       {
         title: "Meals",
-        href: "member/dashboard/meals",
-        icon: "Meal",
-      },
-      {
-        title: "months",
-        href: "member/dashboard/months",
-        icon: "Calendar",
+        href: "/member/dashboard/meals",
+        icon: "Salad",
       },
       {
         title: "Deposits",
-        href: "member/dashboard/deposits",
+        href: "/member/dashboard/deposits",
         icon: "Wallet",
       },
       {
         title: "Expenses",
-        href: "member/dashboard/expenses",
+        href: "/member/dashboard/expenses",
         icon: "CreditCard",
       },
     ],

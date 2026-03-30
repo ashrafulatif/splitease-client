@@ -1,15 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Metadata } from "next";
-import { getMyHouseAction } from "../house/_action";
-import { getHouseMonthsAction } from "../months/_action";
-import { getDepositsByMonthAction } from "./_action";
-import { DepositView } from "@/components/module/Manager/DepositComponents/DepositView";
-import { getHouseMembersAction } from "../members/_action";
 
-const DepositsPage = async (props: {
+import { DepositView } from "@/components/module/Manager/DepositComponents/DepositView";
+import { getMyHouseAction } from "@/app/(dashboardLayout)/manager/dashboard/house/_action";
+import { getHouseMonthsAction } from "@/app/(dashboardLayout)/manager/dashboard/months/_action";
+import { getHouseMembersAction } from "@/app/(dashboardLayout)/manager/dashboard/members/_action";
+import { getDepositsByMonthAction } from "@/app/(dashboardLayout)/manager/dashboard/deposits/_action";
+import { getUserInfo } from "@/service/auth.service";
+
+const MemberDepositsPage = async (props: {
   searchParams: Promise<{ house?: string; month?: string }>;
 }) => {
   const searchParams = await props.searchParams;
+  const userInfo = await getUserInfo();
 
   const housesRes = await getMyHouseAction();
   const houses = housesRes?.data || [];
@@ -47,6 +50,7 @@ const DepositsPage = async (props: {
         members={members}
         selectedHouseId={selectedHouseId}
         selectedMonthId={selectedMonthId}
+        currentUserRole={userInfo?.role}
       />
     </div>
   );
@@ -57,4 +61,4 @@ export const metadata: Metadata = {
   description: "Manage house member deposits and track contributions",
 };
 
-export default DepositsPage;
+export default MemberDepositsPage;

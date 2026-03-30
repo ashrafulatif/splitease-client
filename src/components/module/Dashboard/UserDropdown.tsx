@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -20,13 +20,16 @@ interface UserDropdownProps {
   userInfo: UserInfo;
 }
 
-
 const UserDropdown = ({ userInfo }: UserDropdownProps) => {
   const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={"outline"} size={"icon-lg"} className="rounded-full cursor-pointer ring-2 ring-primary overflow-hidden p-0">
+        <Button
+          variant={"outline"}
+          size={"icon-lg"}
+          className="rounded-full cursor-pointer ring-2 ring-primary overflow-hidden p-0"
+        >
           <Avatar className="size-full">
             <AvatarImage src={userInfo.image} alt={userInfo.name} />
             <AvatarFallback className="bg-background text-sm font-semibold select-none">
@@ -67,8 +70,8 @@ const UserDropdown = ({ userInfo }: UserDropdownProps) => {
 
         <DropdownMenuItem
           onClick={async () => {
-            const toastId = toast.loading("Logging out...",{
-              toasterId:"logout"
+            const toastId = toast.loading("Logging out...", {
+              toasterId: "logout",
             });
             try {
               await logoutUserAction();
