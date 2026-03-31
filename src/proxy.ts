@@ -116,32 +116,12 @@ export async function proxy(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // rule 5: force reset flow if backend requires password change.
-    // if (userInfo?.needPasswordChange) {
-    //   if (pathname !== "/reset-password") {
-    //     const resetPasswordUrl = new URL("/reset-password", request.url);
-    //     resetPasswordUrl.searchParams.set("email", userInfo.email);
-    //     return NextResponse.redirect(resetPasswordUrl);
-    //   }
-
-    //   return NextResponse.next();
-    // }
-
-    // if (pathname === "/reset-password") {
-    //   return NextResponse.redirect(
-    //     new URL(
-    //       getDefaultDashboardRoute((userRole as UserRole) || "MEMBER"),
-    //       request.url,
-    //     ),
-    //   );
-    // }
-
     // rule 5: Common protected routes are allowed for any authenticated role
     if (routeOwner === "COMMON") {
       return NextResponse.next();
     }
 
-    // rule 6: role based route 
+    // rule 6: role based route
     if (userRole && routeOwner !== userRole) {
       return NextResponse.redirect(
         new URL(getDefaultDashboardRoute(userRole), request.url),

@@ -83,7 +83,7 @@ export function MainPieChart({
   }, [data, totalValue])
 
   return (
-    <Card className="flex flex-col border border-border/50 shadow-none bg-white rounded-2xl h-full transition-all duration-300">
+    <Card className="flex flex-col border border-border/50 shadow-none bg-muted/50 rounded-2xl h-full transition-all duration-300">
       <CardHeader className="items-start pb-4 pt-6 px-6">
         <CardTitle className="text-base font-bold tracking-tight text-foreground">{title}</CardTitle>
         {description && <CardDescription className="text-xs font-medium text-muted-foreground/60">{description}</CardDescription>}

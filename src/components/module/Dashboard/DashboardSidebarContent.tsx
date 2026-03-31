@@ -25,7 +25,7 @@ export const DashboardSidebarContent = ({
 }: DashboardSidebarContentProps) => {
   const pathname = usePathname();
   return (
-    <div className="hidden md:flex h-full w-64 flex-col border-r bg-card overflow-y-auto">
+    <div className="hidden md:flex h-full w-64 flex-col border-r bg-muted/50 overflow-y-auto">
       {/* Logo / Brand */}
       <div className="flex items-center h-16  px-6 border-b">
         <Link href={dashboardHome}>

@@ -71,13 +71,13 @@ const UserDropdown = ({ userInfo }: UserDropdownProps) => {
         <DropdownMenuItem
           onClick={async () => {
             const toastId = toast.loading("Logging out...", {
-              toasterId: "logout",
+              id: "logout",
             });
             try {
               await logoutUserAction();
               toast.success("Logout successful", { id: toastId });
               router.push("/login");
-            } catch (error) {
+            } catch {
               toast.error("Logout failed", { id: toastId });
             }
           }}
