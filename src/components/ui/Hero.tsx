@@ -105,14 +105,14 @@ export function HeroSection() {
               alt="SplitEase dashboard preview"
               className="z-2 aspect-video rounded-lg border dark:hidden"
               height="1080"
-              src="https://storage.efferd.com/screen/dashboard-light.webp"
+              src="/heroimg1.png"
               width="1920"
             />
             <img
               alt="SplitEase dashboard preview"
               className="hidden aspect-video rounded-lg bg-background dark:block"
               height="1080"
-              src="https://storage.efferd.com/screen/dashboard-dark.webp"
+              src="heroimg1.png"
               width="1920"
             />
           </div>
