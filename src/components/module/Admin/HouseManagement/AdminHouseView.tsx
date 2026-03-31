@@ -28,7 +28,7 @@ const AdminHouseView = ({ houses = [] }: AdminHouseViewProps) => {
     setIsDeleteOpen(true);
   };
 
-  const filteredHouses = houses.filter(house => 
+  const filteredHouses = (houses ?? []).filter(house => 
     house.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     house.creator.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
     house.creator.name.toLowerCase().includes(searchTerm.toLowerCase())
