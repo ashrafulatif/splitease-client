@@ -28,7 +28,7 @@ export const memberProtectedRoutes: RouteConfig = {
 };
 
 export const ManagerProtectedRoutes: RouteConfig = {
-  exact: ["/payment/success"],
+  exact: [],
   pattern: [/^\/manager\/dashboard/],
 };
 

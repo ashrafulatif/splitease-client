@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { API_ENDPOINTS, buildApiUrl } from "@/apiInstance";
-import { IchagePasswordData, ILoginData, IRegisterData, IUpdateProfileData } from "@/types/auth.types";
+import {
+  IchagePasswordData,
+  ILoginData,
+  IRegisterData,
+  IUpdateProfileData,
+} from "@/types/auth.types";
 import { cookies } from "next/headers";
 
 const registerUser = async (registerData: IRegisterData) => {
@@ -137,40 +142,57 @@ const resendOtp = async (email: string) => {
   }
 };
 
-export async function getUserInfo() {
+export const getUserInfoFromTokens = async (
+  accessToken?: string,
+  betterAuthToken?: string,
+  options?: { noStore?: boolean },
+) => {
   try {
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get("accessToken")?.value;
-    const betterAuthToken = cookieStore.get("better-auth.session_token")?.value;
-
     if (!accessToken) {
       return null;
     }
+
     const url = new URL(buildApiUrl(API_ENDPOINTS.auth.me));
+    const cookieHeader = betterAuthToken
+      ? `accessToken=${accessToken}; better-auth.session_token=${betterAuthToken}`
+      : `accessToken=${accessToken}`;
 
     const res = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Cookie: `accessToken=${accessToken}; better-auth.session_token=${betterAuthToken}`,
+        Cookie: cookieHeader,
       },
+      ...(options?.noStore ? { cache: "no-store" as const } : {}),
     });
 
     if (!res.ok) {
       console.error("Failed to fetch user info:", res.status, res.statusText);
       return null;
     }
+
     const { data } = await res.json();
     return data;
   } catch (error: any) {
     console.error("Error fetching user info:", error);
     return null;
   }
+};
+
+export async function getUserInfo() {
+  try {
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+    const betterAuthToken = cookieStore.get("better-auth.session_token")?.value;
+
+    return getUserInfoFromTokens(accessToken, betterAuthToken);
+  } catch {
+    return null;
+  }
 }
 
 const changePassword = async (payload: IchagePasswordData) => {
   try {
-
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
     const betterAuthToken = cookieStore.get("better-auth.session_token")?.value;
@@ -280,8 +302,9 @@ export const AuthServices = {
   loginUser,
   verifyEmail,
   resendOtp,
+  getUserInfoFromTokens,
   getUserInfo,
   changePassword,
   updateProfile,
-  logoutUser
+  logoutUser,
 };

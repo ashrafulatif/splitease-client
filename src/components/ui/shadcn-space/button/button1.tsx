@@ -1,15 +1,64 @@
-import { Button } from "@/components/ui/button";
+import React from "react";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 
-const ButtonWithIcon = () => {
+type ButtonWithIconProps = {
+  asChild?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+} & Omit<
+  React.ComponentProps<typeof Button>,
+  "asChild" | "children" | "className"
+>;
+
+const baseClassName =
+  "group relative inline-flex h-11 w-fit items-center overflow-hidden rounded-xl ps-5 pe-13 text-sm font-semibold transition-all duration-300 hover:ps-13 hover:pe-5";
+
+const iconClassName =
+  "absolute right-1.5 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg bg-white text-muted-foreground transition-all duration-300 group-hover:right-[calc(100%-2.5rem)]";
+
+const ButtonWithIcon = ({
+  asChild = false,
+  className,
+  children,
+  ...props
+}: ButtonWithIconProps) => {
+  if (asChild && React.isValidElement(children)) {
+    const child = children as React.ReactElement<{
+      className?: string;
+      children?: React.ReactNode;
+    }>;
+
+    return React.cloneElement(
+      child,
+      {
+        className: cn(
+          buttonVariants({ variant: "default", size: "default" }),
+          baseClassName,
+          className,
+          child.props.className,
+        ),
+      },
+      <>
+        <span className="relative z-10 transition-all duration-300">
+          {child.props.children}
+        </span>
+        <span className={iconClassName}>
+          <ArrowUpRight size={16} />
+        </span>
+      </>,
+    );
+  }
+
   return (
-    <Button className="relative text-sm font-medium rounded-full h-12 p-1 ps-6 pe-14 group transition-all duration-500 hover:ps-14 hover:pe-6 w-fit overflow-hidden cursor-pointer">
-      <span className="relative z-10 transition-all duration-500">
-        Let&apos;s Collaborate
+    <Button className={cn(baseClassName, className)} {...props}>
+      <span className="relative z-10 transition-all duration-300">
+        {children ?? "Create Free Account"}
       </span>
-      <div className="absolute right-1 w-10 h-10 bg-background text-foreground rounded-full flex items-center justify-center transition-all duration-500 group-hover:right-[calc(100%-44px)] group-hover:rotate-45">
+      <span className={iconClassName}>
         <ArrowUpRight size={16} />
-      </div>
+      </span>
     </Button>
   );
 };

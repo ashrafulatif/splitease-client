@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon, PhoneCallIcon } from "lucide-react";
+import Link from "next/link";
+import ButtonWithIcon from "./shadcn-space/button/button1";
 
 export function HeroSection() {
   return (
@@ -18,33 +20,41 @@ export function HeroSection() {
         />
       </div>
       <div className="relative z-10 flex max-w-2xl flex-col gap-5 px-4">
-        <a
+        <Link
           className={cn(
             "group flex w-fit items-center gap-3 rounded-sm border bg-card p-1 shadow-xs",
             "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards transition-all delay-500 duration-500 ease-out",
           )}
-          href="#link"
+          href="/"
         >
           <div className="rounded-xs border bg-card px-1.5 py-0.5 shadow-sm">
             <p className="font-mono text-xs">NOW</p>
           </div>
 
-          <span className="text-xs">accepting new client projects</span>
+          <span className="text-xs">live for shared house management</span>
           <span className="block h-5 border-l" />
 
           <div className="pr-1">
             <ArrowRightIcon className="size-3 -translate-x-0.5 duration-150 ease-out group-hover:translate-x-0.5" />
           </div>
-        </a>
+        </Link>
 
         <h1
           className={cn(
-            "text-balance font-medium text-4xl text-foreground leading-tight md:text-5xl",
+            "text-balance font-semibold tracking-tight text-4xl text-foreground leading-tight md:text-6xl",
             "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards delay-100 duration-500 ease-out",
           )}
         >
-          Building Digital Experiences That Drive Growth
+          Split Bills, Meals, and Expenses Without the{" "}
+          <span className="text-primary">Monthly Chaos</span>
         </h1>
+
+        <div
+          className={cn(
+            "h-1 w-28 rounded-full bg-linear-to-r from-primary/40 via-primary to-primary/40",
+            "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards delay-150 duration-500 ease-out",
+          )}
+        />
 
         <p
           className={cn(
@@ -52,18 +62,27 @@ export function HeroSection() {
             "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards delay-200 duration-500 ease-out",
           )}
         >
-          We help brands scale faster through design, development <br /> and
-          strategic execution.
+          SplitEase helps managers and members track deposits, meals, and shared
+          costs with clear monthly summaries and transparent records.
         </p>
 
         <div className="fade-in slide-in-from-bottom-10 flex w-fit animate-in items-center justify-center gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out">
-          <Button variant="outline">
-            <PhoneCallIcon className="size-4 mr-2" data-icon="inline-start" />{" "}
-            Book a Call
-          </Button>
-          <Button>
-            Get started{" "}
-            <ArrowRightIcon className="size-4 ml-2" data-icon="inline-end" />
+          <ButtonWithIcon asChild>
+            <Link href="/register">Create Free Account</Link>
+          </ButtonWithIcon>
+
+          <Button
+            asChild
+            variant="outline"
+            className="h-11 rounded-xl border-border bg-background/80 px-4 text-center font-medium transition-all duration-300 hover:bg-muted/60"
+          >
+            <Link href="/pricing">
+              <PhoneCallIcon
+                className="size-4 mr-2 ml-2"
+                data-icon="inline-start"
+              />
+              View Pricing
+            </Link>
           </Button>
         </div>
       </div>
@@ -83,14 +102,14 @@ export function HeroSection() {
         >
           <div className="relative inset-shadow-2xs inset-shadow-foreground/10 mx-auto max-w-5xl overflow-hidden rounded-lg border bg-background p-2 shadow-xl ring-1 ring-card dark:inset-shadow-foreground/20 dark:inset-shadow-xs">
             <img
-              alt="app screen"
+              alt="SplitEase dashboard preview"
               className="z-2 aspect-video rounded-lg border dark:hidden"
               height="1080"
               src="https://storage.efferd.com/screen/dashboard-light.webp"
               width="1920"
             />
             <img
-              alt="app screen"
+              alt="SplitEase dashboard preview"
               className="hidden aspect-video rounded-lg bg-background dark:block"
               height="1080"
               src="https://storage.efferd.com/screen/dashboard-dark.webp"
