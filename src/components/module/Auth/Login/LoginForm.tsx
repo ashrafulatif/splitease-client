@@ -116,14 +116,14 @@ const LoginForm = ({ redirectPath }: { redirectPath?: string }) => {
             )}
           </form.Field>
 
-          <div className="text-right mt-2">
+          {/* <div className="text-right mt-2">
             <Link
               href="/forgot-password"
               className="text-sm text-primary hover:underline underline-offset-4"
             >
               Forgot your password?
             </Link>
-          </div>
+          </div> */}
 
           {/* submit button */}
 
