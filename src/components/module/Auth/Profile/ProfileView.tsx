@@ -50,7 +50,7 @@ const ProfileView = ({ user }: ProfileViewProps) => {
     <div className="max-w-6xl mx-auto space-y-8">
       
       {/* Header Profile Card */}
-      <Card className="border-none shadow-none bg-white rounded-3xl overflow-hidden group">
+      <Card className="border-none shadow-none rounded-3xl overflow-hidden group">
         <div className="h-32 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent relative">
             <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,transparent)] opacity-20"></div>
         </div>
@@ -101,7 +101,7 @@ const ProfileView = ({ user }: ProfileViewProps) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* About Section */}
-        <Card className="lg:col-span-2 border border-border/50 shadow-none bg-white rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-primary/5">
+        <Card className="lg:col-span-2 border border-border/50 shadow-none rounded-2xl p-8 transition-all hover:shadow-lg hover:shadow-primary/5">
           <div className="space-y-8">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
@@ -139,7 +139,7 @@ const ProfileView = ({ user }: ProfileViewProps) => {
 
             <Separator className="opacity-50" />
 
-            <div className="bg-stone-50 rounded-2xl p-6 border border-border/30">
+            <div className="bg-stone-50 dark:bg-stone-900/50 rounded-2xl p-6 border border-border/30">
                <div className="flex items-center justify-between">
                   <div className="space-y-1">
                      <p className="text-xs font-bold text-foreground">Account Status</p>
@@ -154,7 +154,7 @@ const ProfileView = ({ user }: ProfileViewProps) => {
         </Card>
 
         {/* Security / Quick Links Card */}
-        <Card className="border border-border/50 shadow-none bg-white rounded-2xl p-8 flex flex-col transition-all hover:shadow-lg hover:shadow-primary/5">
+        <Card className="border border-border/50 shadow-none rounded-2xl p-8 flex flex-col transition-all hover:shadow-lg hover:shadow-primary/5">
           <div className="flex items-center gap-3 mb-8">
             <div className="p-2.5 rounded-xl bg-orange-500/10 text-orange-500">
                <Lock className="h-5 w-5" />
@@ -168,8 +168,8 @@ const ProfileView = ({ user }: ProfileViewProps) => {
               className="w-full justify-start rounded-xl group hover:bg-stone-50"
               onClick={() => setIsUpdateModalOpen(true)}
              >
-                <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center mr-3 group-hover:bg-white transition-colors">
-                   <Edit3 className="h-4 w-4 text-muted-foreground" />
+                <div className="w-8 h-8 rounded-lg bg-teal-500/10 flex items-center justify-center mr-3 group-hover:bg-white transition-colors">
+                   <Edit3 className="h-4 w-4 text-primary/90" />
                 </div>
                 <span className="text-xs font-bold text-muted-foreground group-hover:text-foreground">Update Profile</span>
              </Button>

@@ -11,7 +11,7 @@ const MyProfilePage = async () => {
   }
 
   return (
-    <div className="p-4 md:p-10 lg:p-12 min-h-screen bg-stone-50/30">
+    <div className="p-4 md:p-10 lg:p-12 min-h-screen">
         <div className="mb-12">
             <h1 className="text-4xl font-extrabold tracking-tight text-foreground">
                 Your Profile

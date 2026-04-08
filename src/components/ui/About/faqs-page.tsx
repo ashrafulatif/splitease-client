@@ -8,7 +8,7 @@ import {
 
 export function FaqsSection() {
   return (
-    <section className="mx-auto grid min-h-screen w-full max-w-5xl grid-cols-1 md:grid-cols-2 lg:border-x">
+    <section className="mx-auto grid py-10 w-full max-w-5xl grid-cols-1 md:grid-cols-2 lg:border-x">
       <div className="px-4 pt-12 pb-6">
         <div className="space-y-5">
           <h2 className="text-balance font-bold text-4xl md:text-6xl lg:font-black">

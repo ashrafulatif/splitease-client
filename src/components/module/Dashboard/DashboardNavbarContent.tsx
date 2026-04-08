@@ -9,6 +9,7 @@ import DashboardMobileSidebar from "./DashboardMobileSidebar";
 import UserDropdown from "./UserDropdown";
 import { UserInfo } from "@/types/user.type";
 import { NavSection } from "@/types/dashboard.type";
+import { ModeToggle } from "@/components/layout/ModeToggle";
 
 interface DashboardNavbarProps {
   userInfo: UserInfo;
@@ -83,6 +84,7 @@ const DashboardNavbarContent = ({
         ))}
       </div>
 
+      <ModeToggle/>
       {/* User Dropdown */}
       <UserDropdown userInfo={userInfo} />
     </div>

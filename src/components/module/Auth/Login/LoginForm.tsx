@@ -160,7 +160,7 @@ const LoginForm = ({ redirectPath }: { redirectPath?: string }) => {
             <div className="w-full border-t border-gray-300"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">
+            <span className="px-2 dark:text-white bg-white dark:bg-card text-gray-500">
               Or continue with
             </span>
           </div>

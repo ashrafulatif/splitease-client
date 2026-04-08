@@ -101,6 +101,7 @@ export default function NavbarClient({ userInfo }: NavbarClientProps) {
               width={120}
               height={40}
               priority
+              className="dark:invert"
               style={{ width: "auto", height: "auto" }}
             />
           </Link>
