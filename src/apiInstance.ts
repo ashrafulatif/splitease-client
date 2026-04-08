@@ -79,6 +79,9 @@ export const API_ENDPOINTS = {
     updateUserStatus: (id: string) => `/api/v1/users/update-status/${id}`,
     deleteUser: (id: string) => `/api/v1/users/delete/${id}`,
     getUserById: (id: string) => `/api/v1/users/${id}`,
+  },
+  chat:{
+    getChatResponse: "/api/v1/chat",
   }
 } as const;
 

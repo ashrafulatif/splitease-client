@@ -1,5 +1,6 @@
 import DashboardNavbar from "@/components/module/Dashboard/DashboardNavbar";
 import DashboardSidebar from "@/components/module/Dashboard/DashboardSidebar";
+import { ChatbotWidget } from "@/components/module/Dashboard/ChatbotWidget/ChatbotWidget";
 import React from "react";
 
 const RootDashboardLayout = async ({
@@ -19,6 +20,8 @@ const RootDashboardLayout = async ({
           <div>{children}</div>
         </main>
       </div>
+      {/* Global Dashboard AI Assistant */}
+      <ChatbotWidget />
     </div>
   );
 };
