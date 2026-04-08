@@ -4,19 +4,25 @@ import { getHouseMonthsAction } from "./_action";
 import { getMyHouseAction } from "../house/_action";
 
 const MonthsPage = async (props: {
-  searchParams: Promise<{ house?: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
   const searchParams = await props.searchParams;
+
+  const houseIdParam = typeof searchParams?.house === "string" ? searchParams.house : undefined;
+  const page = typeof searchParams?.page === "string" ? parseInt(searchParams.page) : 1;
+  const limit = 10;
 
   const housesRes = await getMyHouseAction();
   const houses = housesRes?.data || [];
 
-  const selectedHouseId = searchParams?.house || houses[0]?.id;
+  const selectedHouseId = houseIdParam || houses[0]?.id;
 
   let months = [];
+  let meta = null;
   if (selectedHouseId) {
-    const monthsRes = await getHouseMonthsAction(selectedHouseId);
+    const monthsRes = await getHouseMonthsAction(selectedHouseId, { page, limit });
     months = monthsRes?.data || [];
+    meta = monthsRes?.meta;
   }
 
   return (
@@ -25,6 +31,7 @@ const MonthsPage = async (props: {
         months={months}
         houses={houses}
         selectedHouseId={selectedHouseId}
+        meta={meta}
       />
     </div>
   );

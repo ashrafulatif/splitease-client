@@ -1,10 +1,17 @@
 import { API_ENDPOINTS, buildApiUrl } from "@/apiInstance";
 import { cookies } from "next/headers";
 
-const getAllUsers = async () => {
+const getAllUsers = async (params? :{page? : number, limit? : number}) => {
   try {
     const cookieStorage = await cookies();
     const url = new URL(buildApiUrl(API_ENDPOINTS.users.getAllUsers));
+
+    if(params?.page){
+      url.searchParams.set("page", params.page.toString());
+    }
+    if(params?.limit){
+      url.searchParams.set("limit", params.limit.toString());
+    }
 
     const res = await fetch(url, {
       method: "GET",
@@ -26,6 +33,7 @@ const getAllUsers = async () => {
     return {
       message: data.message,
       data: data.data,
+      meta: data.meta,
     };
   } catch (error) {
     return {

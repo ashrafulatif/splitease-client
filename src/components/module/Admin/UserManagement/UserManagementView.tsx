@@ -8,12 +8,14 @@ import { DeleteUserDialog } from "./DeleteUserDialog";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { UserInfo } from "@/types/user.type";
+import PaginationControls from "@/components/ui/pagination-control";
 
 interface UserManagementViewProps {
   users: (UserInfo & { status: string; profileImage?: string; isDeleted?: boolean })[];
+  meta?: any;
 }
 
-const AdminUserManagementView = ({ users = [] }: UserManagementViewProps) => {
+const AdminUserManagementView = ({ users = [], meta }: UserManagementViewProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [isStatusOpen, setIsStatusOpen] = useState(false);
@@ -66,6 +68,11 @@ const AdminUserManagementView = ({ users = [] }: UserManagementViewProps) => {
         onStatusToggle={onStatusToggle}
         onDelete={onDelete}
       />
+
+      {/* Pagination component */}
+      {meta && meta.total > 0 && (
+        <PaginationControls meta={meta} />
+      )}
 
       {/* Dialogs */}
       {selectedUser && (

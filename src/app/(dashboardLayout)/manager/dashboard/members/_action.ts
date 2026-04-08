@@ -15,8 +15,8 @@ export const getAllMembersAction = async () => {
   return result;
 };
 
-export const getHouseMembersAction = async (id: string) => {
-  const result = await MemberService.getHouseMembers(id);
+export const getHouseMembersAction = async (id: string, params?: {page?: number, limit?: number}) => {
+  const result = await MemberService.getHouseMembers(id, params);
   return result;
 };
 

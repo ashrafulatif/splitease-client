@@ -71,11 +71,18 @@ const getAllMembers = async () => {
   }
 };
 
-const getHouseMembers = async (id: string) => {
+const getHouseMembers = async (id: string, params?: {page?: number, limit?: number}) => {
   try {
     const cookieStorage = await cookies();
 
     const url = new URL(buildApiUrl(API_ENDPOINTS.members.getHouseMembers(id)));
+
+    if (params?.page) {
+      url.searchParams.set("page", params.page.toString());
+    }
+    if (params?.limit) {
+      url.searchParams.set("limit", params.limit.toString());
+    }
 
     const res = await fetch(url, {
       method: "GET",
@@ -97,6 +104,7 @@ const getHouseMembers = async (id: string) => {
     return {
       message: data.message,
       data: data.data,
+      meta: data.meta,
     };
   } catch {
     return {

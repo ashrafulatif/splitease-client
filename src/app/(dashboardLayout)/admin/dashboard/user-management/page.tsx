@@ -8,13 +8,16 @@ export const metadata: Metadata = {
   description: "Manage system users, roles, and access.",
 };
 
-const AdminUserManagementPage = async () => {
-  const result = await UserServices.getAllUsers();
+const AdminUserManagementPage = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) => {
+  const params = await searchParams;
+  
+  const result = await UserServices.getAllUsers(params);
   const users = result?.data || [];
+  const meta = result?.meta;
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
-      <AdminUserManagementView users={users} />
+      <AdminUserManagementView users={users} meta={meta} />
     </div>
   );
 };

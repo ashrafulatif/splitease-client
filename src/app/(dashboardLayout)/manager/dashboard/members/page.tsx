@@ -6,19 +6,25 @@ import { getMyHouseAction } from "../house/_action";
 const MembersPage = async ({
   searchParams,
 }: {
-  searchParams: Promise<{ house?: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
   const params = await searchParams;
+  
+  const houseIdParam = typeof params?.house === "string" ? params.house : undefined;
+  const page = typeof params?.page === "string" ? parseInt(params.page) : 1;
+  const limit = 10;
 
   const housesRes = await getMyHouseAction();
   const houses = housesRes?.data || [];
 
-  const selectedHouseId = params?.house || houses[0]?.id;
+  const selectedHouseId = houseIdParam || houses[0]?.id;
 
   let members = [];
+  let meta = null;
   if (selectedHouseId) {
-    const membersRes = await getHouseMembersAction(selectedHouseId);
+    const membersRes = await getHouseMembersAction(selectedHouseId, { page, limit });
     members = membersRes?.data || [];
+    meta = membersRes?.meta;
   }
 
   return (
@@ -27,6 +33,7 @@ const MembersPage = async ({
         members={members}
         houses={houses}
         selectedHouseId={selectedHouseId}
+        meta={meta}
       />
     </div>
   );

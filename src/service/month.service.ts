@@ -38,11 +38,18 @@ const createMonth = async (payload: ICreateMonth) => {
   }
 };
 
-const getHouseMonths = async (id: string) => {
+const getHouseMonths = async (id: string, params?: {page?: number, limit?: number}) => {
   try {
     const cookieStorage = await cookies();
 
     const url = new URL(buildApiUrl(API_ENDPOINTS.months.getHouseMonths(id)));
+
+    if (params?.page) {
+      url.searchParams.set("page", params.page.toString());
+    }
+    if (params?.limit) {
+      url.searchParams.set("limit", params.limit.toString());
+    }
 
     const res = await fetch(url, {
       method: "GET",
@@ -64,6 +71,7 @@ const getHouseMonths = async (id: string) => {
     return {
       message: data.message,
       data: data.data,
+      meta: data.meta,
     };
   } catch {
     return {

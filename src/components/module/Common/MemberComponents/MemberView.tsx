@@ -29,8 +29,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import PaginationControls from "@/components/ui/pagination-control";
 
-const MemberView = ({ members = [], houses = [], selectedHouseId }: { members?: any[], houses?: any[], selectedHouseId?: string }) => {
+const MemberView = ({ members = [], houses = [], selectedHouseId, meta }: { members?: any[], houses?: any[], selectedHouseId?: string, meta?: any }) => {
   const [selectedMember, setSelectedMember] = useState<any>(null);
   const [isRemoveOpen, setIsRemoveOpen] = useState(false);
   const router = useRouter();
@@ -166,6 +167,10 @@ const MemberView = ({ members = [], houses = [], selectedHouseId }: { members?: 
           </TableBody>
         </Table>
       </div>
+
+      {meta && meta.total > 0 && (
+        <PaginationControls meta={meta} />
+      )}
 
       {selectedMember && (
         <RemoveMemberDialog

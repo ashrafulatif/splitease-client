@@ -7,12 +7,14 @@ import { Metadata } from "next";
 import { Contact } from "@/components/ui/Contact/contact";
 import { FaqsSection } from "@/components/ui/About/faqs-page";
 import { RolesSection } from "@/components/module/Landing/roles-section";
+import { ComparisonSection } from "@/components/module/Landing/comparison-section";
 
 export default function CommonLayoutHomePage() {
   return (
     <div>
       <HeroSection />
       <FeatureSection />
+      <ComparisonSection />
       <RolesSection />
       <HowtoStartSection />
       <Testimonials />

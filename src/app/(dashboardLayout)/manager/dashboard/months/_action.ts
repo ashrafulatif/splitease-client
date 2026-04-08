@@ -11,8 +11,8 @@ export const createMonthAction = async (payload: any) => {
   return result;
 };
 
-export const getHouseMonthsAction = async (id: string) => {
-  const result = await MonthServices.getHouseMonths(id);
+export const getHouseMonthsAction = async (id: string, params?: {page?: number, limit?: number}) => {
+  const result = await MonthServices.getHouseMonths(id, params);
 
   return result;
 };

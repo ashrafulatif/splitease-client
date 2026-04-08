@@ -7,12 +7,14 @@ import { AdminDeleteHouseDialog } from "./AdminDeleteHouseDialog";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { IHouse } from "@/types/house.types";
+import PaginationControls from "@/components/ui/pagination-control";
 
 interface AdminHouseViewProps {
   houses: IHouse[];
+  meta?: any;
 }
 
-const AdminHouseView = ({ houses = [] }: AdminHouseViewProps) => {
+const AdminHouseView = ({ houses = [], meta }: AdminHouseViewProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedHouse, setSelectedHouse] = useState<IHouse | null>(null);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -66,6 +68,10 @@ const AdminHouseView = ({ houses = [] }: AdminHouseViewProps) => {
         onEdit={onEdit}
         onDelete={onDelete}
       />
+
+      {meta && meta.total > 0 && (
+        <PaginationControls meta={meta} />
+      )}
 
       {/* Dialogs */}
       <AdminUpdateHouseDialog 

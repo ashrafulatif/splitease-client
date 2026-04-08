@@ -28,8 +28,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import PaginationControls from "@/components/ui/pagination-control";
 
-const MonthView = ({ months = [], houses = [], selectedHouseId }: { months?: any[], houses?: any[], selectedHouseId?: string }) => {
+const MonthView = ({ months = [], houses = [], selectedHouseId, meta }: { months?: any[], houses?: any[], selectedHouseId?: string, meta?: any }) => {
   const [selectedMonth, setSelectedMonth] = useState<any>(null);
   const [isRemoveOpen, setIsRemoveOpen] = useState(false);
   const router = useRouter();
@@ -187,6 +188,10 @@ const MonthView = ({ months = [], houses = [], selectedHouseId }: { months?: any
           </TableBody>
         </Table>
       </div>
+
+      {meta && meta.total > 0 && (
+        <PaginationControls meta={meta} />
+      )}
 
       {selectedMonth && (
         <RemoveMonthDialog
