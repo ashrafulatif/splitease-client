@@ -18,7 +18,7 @@ type FeatureType = {
 
 export function FeatureSection() {
   return (
-    <div className="mx-auto w-full max-w-5xl space-y-8 pt-20">
+    <div id="features" className="mx-auto w-full max-w-5xl space-y-8 pt-20">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
           Everything Your Shared Home Needs{" "}

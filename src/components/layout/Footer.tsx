@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import Image from "next/image";
 
 interface Footer7Props {
@@ -49,23 +49,23 @@ const defaultSections = [
     title: "Resources",
     links: [
       { name: "FAQ", href: "/#faqs" },
-      { name: "Support", href: "#" },
-      { name: "Terms", href: "#" },
-      { name: "Privacy", href: "#" },
+      { name: "Support", href: "/contact" },
+      { name: "Terms", href: "/privacy" },
+      { name: "Privacy", href: "/privacy" },
     ],
   },
 ];
 
 const defaultSocialLinks = [
-  { icon: <FaInstagram className="size-5" />, href: "#", label: "Instagram" },
-  { icon: <FaFacebook className="size-5" />, href: "#", label: "Facebook" },
-  { icon: <FaTwitter className="size-5" />, href: "#", label: "Twitter" },
-  { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
+  { icon: <FaGithub className="size-5" />, href: "https://github.com/ashrafulatif", label: "Github" },
+  { icon: <FaFacebook className="size-5" />, href: "https://www.facebook.com/ashrafulhaque565/", label: "Facebook" },
+  { icon: <FaTwitter className="size-5" />, href: "https://x.com/", label: "Twitter" },
+  { icon: <FaLinkedin className="size-5" />, href: "https://www.linkedin.com/in/ashrafulhaque08/", label: "LinkedIn" },
 ];
 
 const defaultLegalLinks = [
-  { name: "Terms and Conditions", href: "#" },
-  { name: "Privacy Policy", href: "#" },
+  { name: "Terms and Conditions", href: "/privacy" },
+  { name: "Privacy Policy", href: "/privacy" },
 ];
 
 export const Footer = ({

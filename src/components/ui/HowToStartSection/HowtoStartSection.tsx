@@ -11,7 +11,7 @@ type FeatureType = {
 
 export function HowtoStartSection() {
   return (
-    <div className="mx-auto max-w-5xl pt-30">
+    <div id="how-it-works" className="mx-auto max-w-5xl pt-30">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
           How SplitEase Works{" "}

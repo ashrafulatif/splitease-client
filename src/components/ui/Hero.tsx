@@ -112,7 +112,7 @@ export function HeroSection() {
               alt="SplitEase dashboard preview"
               className="hidden aspect-video rounded-lg bg-background dark:block"
               height="1080"
-              src="heroimg1.png"
+              src="/heroimg2.png"
               width="1920"
             />
           </div>

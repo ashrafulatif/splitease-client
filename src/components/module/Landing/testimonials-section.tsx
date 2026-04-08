@@ -92,7 +92,7 @@ const thirdColumn = testimonials.slice(6, 9);
 
 export function Testimonials() {
   return (
-    <section className="relative py-20">
+    <section id="testimonials" className="relative py-20">
       <div className="mx-auto max-w-5xl">
         <div className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-4">
           <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
