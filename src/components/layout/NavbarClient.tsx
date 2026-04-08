@@ -25,6 +25,7 @@ import {
 import { getDefaultDashboardRoute } from "@/lib/authUtils";
 import { UserInfo } from "@/types/user.type";
 import { logoutUserAction } from "@/app/(commonLayout)/(authRouteGroup)/logout/_action";
+import { ModeToggle } from "./ModeToggle";
 
 type NavbarClientProps = {
   userInfo: UserInfo | null;
@@ -63,6 +64,27 @@ export default function NavbarClient({ userInfo }: NavbarClientProps) {
     }
   };
 
+  const publicRoutes = [
+    { label: "Pricing", href: "/pricing" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact Us", href: "/contact" },
+    { label: "Policy", href: "/policy" },
+  ];
+
+  const navRoutes = userInfo
+    ? userInfo.role === "ADMIN"
+      ? [
+          ...publicRoutes,
+          { label: "Users", href: `${dashboardHref}/user-management` },
+          { label: "Houses", href: `${dashboardHref}/house-management` },
+        ]
+      : [
+          ...publicRoutes,
+          { label: "Expenses", href: `${dashboardHref}/expenses` },
+          { label: "Meals", href: `${dashboardHref}/meals` },
+        ]
+    : publicRoutes;
+
   return (
     <header
       className={cn("sticky top-0 z-50 w-full border-b border-transparent", {
@@ -84,27 +106,22 @@ export default function NavbarClient({ userInfo }: NavbarClientProps) {
           </Link>
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
-              <NavigationMenuLink className="px-4" asChild>
-                <Link
-                  href="/pricing"
-                  className="hover:text-primary text-xs rounded-md p-2"
-                >
-                  Pricing
-                </Link>
-              </NavigationMenuLink>
-              <NavigationMenuLink className="px-4" asChild>
-                <Link
-                  href="/about"
-                  className="hover:text-primary text-xs rounded-md p-2"
-                >
-                  About Us
-                </Link>
-              </NavigationMenuLink>
+              {navRoutes.map((route) => (
+                <NavigationMenuLink key={route.href} className="px-4" asChild>
+                  <Link
+                    href={route.href}
+                    className="hover:text-primary text-xs rounded-md p-2 whitespace-nowrap"
+                  >
+                    {route.label}
+                  </Link>
+                </NavigationMenuLink>
+              ))}
             </NavigationMenuList>
           </NavigationMenu>
         </div>
 
         <div className="hidden items-center gap-2 md:flex">
+          <ModeToggle />
           {userInfo ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -175,21 +192,17 @@ export default function NavbarClient({ userInfo }: NavbarClientProps) {
         open={open}
         className="flex flex-col justify-between gap-4 overflow-y-auto"
       >
-        <div className="flex w-full flex-col gap-3">
-          <Link
-            href="/pricing"
-            className="hover:text-primary text-sm rounded-md p-2"
-            onClick={() => setOpen(false)}
-          >
-            Pricing
-          </Link>
-          <Link
-            href="/about"
-            className="hover:text-primary rounded-md p-2"
-            onClick={() => setOpen(false)}
-          >
-            About Us
-          </Link>
+        <div className="flex w-full flex-col gap-3 font-medium">
+          {navRoutes.map((route) => (
+            <Link
+              key={route.href}
+              href={route.href}
+              className="hover:text-primary rounded-md p-2"
+              onClick={() => setOpen(false)}
+            >
+              {route.label}
+            </Link>
+          ))}
         </div>
 
         <div className="flex flex-col gap-2">

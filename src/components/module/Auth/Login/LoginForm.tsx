@@ -19,6 +19,8 @@ import { toast } from "sonner";
 import AppField from "../../shared/form/AppField";
 import AppSubmitButton from "../../shared/form/AppSubmitButton";
 import { useRouter } from "next/navigation";
+import LoginDemo from "./LoginDemo";
+
 
 const LoginForm = ({ redirectPath }: { redirectPath?: string }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,6 +50,15 @@ const LoginForm = ({ redirectPath }: { redirectPath?: string }) => {
       }
     },
   });
+
+  const handleDemoLogin = (email: string, password: string) => {
+    form.setFieldValue("email", email);
+    form.setFieldValue("password", password);
+    // Submit the form after a short delay to ensure the field values are updated
+    setTimeout(() => {
+      form.handleSubmit();
+    }, 100);
+  };
 
   return (
     <Card className="w-full max-w-md mx-auto shadow-md py-10 border border-primary/50">
@@ -141,6 +152,8 @@ const LoginForm = ({ redirectPath }: { redirectPath?: string }) => {
             )}
           </form.Subscribe>
         </form>
+
+        <LoginDemo onSelect={handleDemoLogin} />
 
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
