@@ -144,7 +144,7 @@ export const ChatbotWidget = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-white dark:bg-black rounded-xl pr-10 focus-visible:ring-primary/20"
+                className="flex-1 bg-background rounded-xl pr-10 focus-visible:ring-primary/20"
                 autoFocus
               />
               <Button

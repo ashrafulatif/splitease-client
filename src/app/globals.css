@@ -128,3 +128,51 @@
     @apply font-sans;
   }
 }
+
+/*
+ * Keep legacy light utility classes compatible with the semantic theme tokens
+ * while feature screens are migrated to theme-aware utilities.
+ */
+@layer utilities {
+  .dark [class~="bg-white"],
+  .dark [class~="bg-stone-50"],
+  .dark [class~="bg-stone-50/50"],
+  .dark [class~="bg-stone-100"],
+  .dark [class~="bg-stone-200"],
+  .dark [class~="hover:bg-white"]:hover,
+  .dark [class~="focus:bg-white"]:focus,
+  .dark [class~="hover:bg-stone-200"]:hover {
+    background-color: var(--card) !important;
+  }
+
+  .dark [class~="hover:bg-stone-50"]:hover,
+  .dark [class~="hover:bg-stone-50/50"]:hover,
+  .dark [class~="hover:bg-stone-100"]:hover,
+  .dark [class~="focus:bg-stone-50"]:focus {
+    background-color: var(--muted) !important;
+  }
+
+  .dark [class~="text-stone-300"],
+  .dark [class~="text-stone-400"],
+  .dark [class~="text-stone-500"],
+  .dark [class~="text-stone-600"],
+  .dark [class~="text-gray-500"] {
+    color: var(--muted-foreground) !important;
+  }
+
+  .dark [class~="border-stone-50"],
+  .dark [class~="border-stone-100"],
+  .dark [class~="border-stone-200"],
+  .dark [class~="border-gray-300"],
+  .dark [class~="border-white"] {
+    border-color: var(--border) !important;
+  }
+
+  .dark [class~="shadow-stone-100"] {
+    box-shadow: none !important;
+  }
+
+  .dark [class~="focus:shadow-stone-100"][class~="focus:shadow-lg"]:focus {
+    box-shadow: none !important;
+  }
+}
