@@ -98,6 +98,8 @@ SplitEase is a modern, full-stack web application for managing shared expenses, 
    # or
    bun install
    ```
+   Installing dependencies sets up Husky. The pre-commit hook runs ESLint on
+   staged JavaScript and TypeScript files and applies safe fixes automatically.
 3. **Configure environment variables:**
    - Copy `.env.example` to `.env` and fill in required values.
 4. **Run the development server:**
@@ -118,9 +120,11 @@ directory mounted for live updates. You need Docker Engine and the Docker Compos
 plugin installed.
 
 1. **Configure environment variables:**
+
    ```bash
    cp .env.example .env
    ```
+
    Replace the placeholder values for `BACKEND_URL`, `FRONTENDURL`,
    `JWT_ACCESS_SECRET`, and `NEXT_PUBLIC_API_BASE_URL`. The public API URL must
    be reachable by your browser (for example, `http://localhost:4000/api/v1` if
@@ -130,11 +134,13 @@ plugin installed.
    The Compose file uses the external `splitease-network` network. If your backend
    already creates this network, start it first and make sure it is attached to
    the same network. Otherwise, create the network:
+
    ```bash
    docker network create splitease-network
    ```
 
 3. **Build and start the frontend:**
+
    ```bash
    docker compose up
    ```
